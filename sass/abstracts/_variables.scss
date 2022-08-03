@@ -1,7 +1,29 @@
+$thm: (
+    drk: (
+        pri: #323232,
+        sec: #404040,
+        ter: #5A5D5F,
+        acc: #903C3C,
+        txt: #FBF3F3,
+        sub: #D82F2F,
+    ),
+    lgt: (
+        pri: #D4D4D4,
+        sec: #F2F2F3,
+        ter: #A7B4BD,
+        acc: #F89D96,
+        txt: #1E1E1E,
+        sub: #E75757,
+    ),
+);
 
+$clr: (
+    bkg: #1E1E1E,
+    dpy: #00ECF8,
+);
 
 $ft-fy: (
-    btn: 'Inter', sans-serif,
-    dpy: 'DSEG7', monospace,
-    tpe: 'Courier Prime', monospace,
-)
+    btn: ('Inter', sans-serif),
+    dpy: ('DSEG7', monospace),
+    tpe: ('Courier Prime', monospace),
+);

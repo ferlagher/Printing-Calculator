@@ -1,0 +1,7 @@
+[data-theme = 'drk'] {
+    @include theme('drk')
+
+}
+body {
+    @include theme('lgt')
+}

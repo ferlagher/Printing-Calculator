@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Courier+Prime&family=Inter&display=swap");
+[data-theme=drk] {
+  --clr-pri: #323232;
+  --clr-sec: #404040;
+  --clr-ter: #5A5D5F;
+  --clr-acc: #903C3C;
+  --clr-txt: #FBF3F3;
+  --clr-sub: #D82F2F;
+}
+
+body {
+  --clr-pri: #D4D4D4;
+  --clr-sec: #F2F2F3;
+  --clr-ter: #A7B4BD;
+  --clr-acc: #F89D96;
+  --clr-txt: #1E1E1E;
+  --clr-sub: #E75757;
+}
+
+@font-face {
+  font-family: "DSEG7";
+  src: url(".fonts/DSEG7Modern-BoldItalic.ttf");
+}/*# sourceMappingURL=style.css.map */

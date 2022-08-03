@@ -1,0 +1,6 @@
+
+@mixin theme($th) {
+    @each $color, $val in map-get($thm, $th) {
+        --clr-#{$color}: #{$val};
+    }
+}
