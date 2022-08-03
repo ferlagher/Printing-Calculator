@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./css/style.css">
+
     <title>Document</title>
 </head>
 
@@ -21,44 +24,36 @@
                 <span class="calc__digit calc__digit--on"></span>
             </div>
             <div class="calc__buttons">
-                <div class="calc__print">
-                    <button id="IT">IT</button>
-                    <button id="°/#">♢/#</button>
-                </div>
-                <div class="calc__margin">
+                <div class="calc__margin btn--sm">
                     <button id="COST">COST</button>
                     <button id="SELL">SELL</button>
                     <button id="MAR">MAR</button>
                 </div>
-                <div class="calc__percent">
+                <div class="calc__print btn--sm">
+                    <button id="IT">IT</button>
+                    <button id="°/#">♢/#</button>
+                </div>
+                <div class="calc__tax btn--sm">
+                    <button id="TAX+">TAX+</button>
+                    <button id="TAX-">TAX-</button>
+                </div>
+                <div class="calc__sign btn--sm">
+                    <button id="+/-">+/*</button>
+                </div>
+                <div class="calc__percent btn--sm">
                     <button id="%">%</button>
                     <button id="MU/MD">MD/MU</button>
                 </div>
-                <div class="calc__sign">
-                    <button id="+/-">+/*</button>
-                </div>
-                <div class="calc__tax">
-                    <button id="TAX+">TAX+</button>
-                    <button id="TAX-">TAX-</button>
+                <div class="calc__clear">
+                    <button id="CA">CA</button>
+                    <button id="C" class="btn--acc">C</button>
+                    <button id=">">▻</button>
                 </div>
                 <div class="calc__memory">
                     <button id="M+">M+</button>
                     <button id="M-">M-</button>
                     <button id="M°">M♢</button>
                     <button id="M*">M*</button>
-                </div>
-                <div class="calc__clear">
-                    <button id="CA">CA</button>
-                    <button id="C">C</button>
-                    <button id=">">▻</button>
-                </div>
-                <div class="calc__operators">
-                    <button id="*">*</button>
-                    <button id="G*">G*</button>
-                    <button id="+=">+=</button>
-                    <button id="x">x</button>
-                    <button id="-">-</button>
-                    <button id="/">/</button>
                 </div>
                 <div class="calc__numpad">
                     <button id="0">0</button>
@@ -73,6 +68,14 @@
                     <button id="7">7</button>
                     <button id="8">8</button>
                     <button id="9">9</button>
+                </div>
+                <div class="calc__operators">
+                    <button id="*">*</button>
+                    <button id="G*">G*</button>
+                    <button id="+=" class="btn--ter">+=</button>
+                    <button id="x">x</button>
+                    <button id="-" class="btn--acc">-</button>
+                    <button id="/">/</button>
                 </div>
             </div>
         </div>

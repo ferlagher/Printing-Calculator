@@ -6,6 +6,7 @@ $thm: (
         acc: #903C3C,
         txt: #FBF3F3,
         sub: #D82F2F,
+        sdw: rgba(29, 29, 29, 0.4), 
     ),
     lgt: (
         pri: #D4D4D4,
@@ -14,6 +15,7 @@ $thm: (
         acc: #F89D96,
         txt: #1E1E1E,
         sub: #E75757,
+        sdw: rgba(130, 124, 121, 0.4),
     ),
 );
 
@@ -26,4 +28,20 @@ $ft-fy: (
     btn: ('Inter', sans-serif),
     dpy: ('DSEG7', monospace),
     tpe: ('Courier Prime', monospace),
+);
+
+$ft-wt: (
+    rgl: 400,
+    bld: 700,
+);
+
+$ft-sz: (
+    xl: 2rem,
+    lg: 1.5rem,
+    md: 1.25rem,
+    sm: 1rem,
+);
+
+$wdt: (
+    btn: calc((100vw - 8px * 6) / 5),
 );

@@ -6,6 +6,7 @@
   --clr-acc: #903C3C;
   --clr-txt: #FBF3F3;
   --clr-sub: #D82F2F;
+  --clr-sdw: rgba(29, 29, 29, 0.4);
 }
 
 body {
@@ -15,9 +16,34 @@ body {
   --clr-acc: #F89D96;
   --clr-txt: #1E1E1E;
   --clr-sub: #E75757;
+  --clr-sdw: rgba(130, 124, 121, 0.4);
 }
 
 @font-face {
   font-family: "DSEG7";
   src: url(".fonts/DSEG7Modern-BoldItalic.ttf");
+  font-weight: 700;
+}
+button {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 2rem;
+  color: var(--clr-txt);
+  width: calc((100vw - 48px) / 5);
+  height: calc((100vw - 48px) / 5);
+  background-color: var(--clr-sec);
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 4px var(--clr-sdw);
+}
+button.btn--ter {
+  background-color: var(--clr-ter);
+}
+button.btn--acc {
+  background-color: var(--clr-acc);
+}
+
+.btn--sm button {
+  font-size: 1rem;
+  height: calc((100vw - 48px) / 5 / 2);
 }/*# sourceMappingURL=style.css.map */

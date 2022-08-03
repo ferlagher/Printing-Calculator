@@ -1,7 +1,7 @@
 @import './abstracts/variables';
 @import './abstracts/mixins';
-@import './abstracts/themes';
 
+@import './base/themes';
 @import './base/typography';
 
-@import './layout/body';
+@import './components/buttons';

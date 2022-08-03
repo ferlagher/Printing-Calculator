@@ -1,0 +1,22 @@
+button {
+    @include font('btn', 'rgl', 'xl', var(--clr-txt));
+    width: map-get($wdt, 'btn');
+    height: map-get($wdt, 'btn');
+    background-color: var(--clr-sec);
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 4px var(--clr-sdw);
+    &.btn--ter {
+        background-color: var(--clr-ter);
+    }
+    &.btn--acc {
+        background-color: var(--clr-acc);
+    }
+}
+
+.btn--sm {
+    button {
+        font-size: map-get($ft-sz, 'sm');
+        height: calc(map-get($wdt, 'btn') / 2);
+    }
+}

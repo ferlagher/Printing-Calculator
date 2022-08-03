@@ -1,6 +1,14 @@
-
 @mixin theme($th) {
     @each $color, $val in map-get($thm, $th) {
         --clr-#{$color}: #{$val};
     }
+}
+
+@mixin font($fy, $wt, $sz, $cr) {
+    font: {
+        family: map-get($ft-fy, $fy);
+        weight: map-get($ft-wt, $wt);
+        size: map-get($ft-sz, $sz);
+    }
+    color: $cr;
 }
