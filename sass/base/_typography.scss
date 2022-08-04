@@ -11,8 +11,6 @@ button {
     line-height: 0.5em;
 }
 
-.calc {
-    &__display {
+.calc__display {
         @include font('dpy', 'bld', 'lg', map-get($clr, 'dpy'));
     }
-}

@@ -23,6 +23,7 @@ body {
   --clr-txt: #1E1E1E;
   --clr-sub: #E75757;
   --clr-sdw: rgba(130, 124, 121, 0.4);
+  transition: color 0.5s ease-in-out;
 }
 
 @font-face {
@@ -45,6 +46,61 @@ button {
   color: #00ECF8;
 }
 
+svg {
+  width: 100%;
+  height: auto;
+  stroke: var(--clr-txt);
+  fill: none;
+  stroke-width: 32;
+}
+svg .moon {
+  display: none;
+  stroke-dasharray: 106rem;
+  stroke-dashoffset: 106rem;
+  animation: moon 0.9s ease-in-out forwards;
+}
+svg .sun {
+  stroke-dasharray: 45rem;
+  stroke-dashoffset: 45rem;
+  animation: sun 0.9s ease-in-out forwards;
+}
+svg .beams {
+  stroke-dasharray: 4rem;
+  stroke-dashoffset: 4rem;
+  animation: beams 0.3s 0.7s ease-in forwards;
+}
+
+[data-theme=drk] svg .moon {
+  display: block;
+}
+[data-theme=drk] svg .sun, [data-theme=drk] svg .beams {
+  display: none;
+}
+
+@keyframes moon {
+  0% {
+    stroke-dashoffset: 106rem;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes sun {
+  0% {
+    stroke-dashoffset: 45rem;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes beams {
+  0% {
+    stroke-dashoffset: 4rem;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
 button {
   width: calc((100vw - 48px) / 5);
   height: calc((100vw - 48px) / 5);
@@ -52,6 +108,7 @@ button {
   border: none;
   border-radius: 8px;
   box-shadow: 0 4px 4px var(--clr-sdw);
+  transition: 0.1s ease-in-out;
 }
 button.btn--ter {
   background-color: var(--clr-ter);
@@ -59,41 +116,26 @@ button.btn--ter {
 button.btn--acc {
   background-color: var(--clr-acc);
 }
+button:hover {
+  filter: brightness(0.9);
+}
+button:active {
+  box-shadow: 0 2px 2px var(--clr-sdw);
+  filter: brightness(0.85);
+  transform: translateY(2px);
+}
 
 .btn--sm button {
   font-size: 1rem;
   height: calc((100vw - 48px) / 5 / 2);
 }
 
-header {
-  position: fixed;
+.btn--md {
+  width: calc((100vw - 48px) / 5 * 4 / 5);
+  height: calc((100vw - 48px) / 5 * 4 / 5);
   padding: 8px;
-  z-index: 99;
 }
 
-.tape {
-  height: 100vh;
-  position: fixed;
-  overflow: scroll;
-}
-
-body {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.calc {
-  background-color: var(--clr-pri);
-  /*     height: 0; */
-  overflow: hidden;
-  position: fixed;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 .calc__display {
   width: 100%;
   height: 2em;
@@ -108,7 +150,37 @@ body {
   margin: 0.5em 8px;
 }
 .calc__digit--off {
-  opacity: 0.15;
+  opacity: 0.1;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+header {
+  position: fixed;
+  padding: 8px;
+  z-index: 99;
+}
+
+.tape {
+  background-color: var(--clr-pri);
+  height: 100vh;
+}
+
+.calc {
+  background-color: var(--clr-pri);
+  /*     height: 0; */
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 -6px 6px var(--clr-sdw);
 }
 .calc__buttons {
   padding: 8px;

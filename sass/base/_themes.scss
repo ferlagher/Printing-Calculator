@@ -3,5 +3,6 @@
 
 }
 body {
-    @include theme('lgt')
+    @include theme('lgt');
+    transition: color 0.5s ease-in-out
 }

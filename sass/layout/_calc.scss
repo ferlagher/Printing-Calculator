@@ -7,24 +7,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    &__display {
-        width: 100%;
-        height: 2em;
-        background-color: map-get($clr, 'bkg');
-        text-align: end;
-        position: relative;
-    }
-
-    &__digit {
-        position: absolute;
-        top: 0;
-        right: 0;
-        margin: 0.5em map-get($spc, 'sm');
-        &--off {
-            opacity: 0.15;
-        }
-    }
+    box-shadow: 0 -6px 6px var(--clr-sdw);
 
     $areas: ('margin', 'print', 'tax', 'sign', 'percent', 'clear', 'memory', 'numpad', 'operators');
 

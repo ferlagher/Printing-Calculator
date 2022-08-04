@@ -4,10 +4,12 @@
 @import './base/reset';
 @import './base/themes';
 @import './base/typography';
+@import './base/svg';
 
 @import './components/buttons';
+@import './components/display';
 
+@import './layout/body';
 @import './layout/header';
 @import './layout/tape';
-@import './layout/body';
 @import './layout/calc';
