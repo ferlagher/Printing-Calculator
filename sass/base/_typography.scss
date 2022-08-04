@@ -2,6 +2,17 @@
 
 @font-face{
     font-family: "DSEG7";
-    src: url('.fonts/DSEG7Modern-BoldItalic.ttf');
+    src: url('../fonts/DSEG7Modern-BoldItalic.ttf');
     font-weight: 700;
+}
+
+button {
+    @include font('btn', 'rgl', 'xl', var(--clr-txt));
+    line-height: 0.5em;
+}
+
+.calc {
+    &__display {
+        @include font('dpy', 'bld', 'lg', map-get($clr, 'dpy'));
+    }
 }

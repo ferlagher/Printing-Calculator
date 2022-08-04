@@ -1,4 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Courier+Prime&family=Inter&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 [data-theme=drk] {
   --clr-pri: #323232;
   --clr-sec: #404040;
@@ -21,7 +27,7 @@ body {
 
 @font-face {
   font-family: "DSEG7";
-  src: url(".fonts/DSEG7Modern-BoldItalic.ttf");
+  src: url("../fonts/DSEG7Modern-BoldItalic.ttf");
   font-weight: 700;
 }
 button {
@@ -29,6 +35,17 @@ button {
   font-weight: 400;
   font-size: 2rem;
   color: var(--clr-txt);
+  line-height: 0.5em;
+}
+
+.calc__display {
+  font-family: "DSEG7", monospace;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #00ECF8;
+}
+
+button {
   width: calc((100vw - 48px) / 5);
   height: calc((100vw - 48px) / 5);
   background-color: var(--clr-sec);
@@ -46,4 +63,120 @@ button.btn--acc {
 .btn--sm button {
   font-size: 1rem;
   height: calc((100vw - 48px) / 5 / 2);
+}
+
+header {
+  position: fixed;
+  padding: 8px;
+  z-index: 99;
+}
+
+.tape {
+  height: 100vh;
+  position: fixed;
+  overflow: scroll;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.calc {
+  background-color: var(--clr-pri);
+  /*     height: 0; */
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.calc__display {
+  width: 100%;
+  height: 2em;
+  background-color: #1E1E1E;
+  text-align: end;
+  position: relative;
+}
+.calc__digit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0.5em 8px;
+}
+.calc__digit--off {
+  opacity: 0.15;
+}
+.calc__buttons {
+  padding: 8px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-areas: "margin margin margin print print" "tax tax sign percent percent" "clear clear clear memory memory" "numpad numpad numpad memory memory" "numpad numpad numpad operators operators";
+  gap: 8px;
+}
+.calc__margin {
+  grid-area: margin;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  justify-content: space-between;
+  gap: 8px;
+}
+.calc__print {
+  grid-area: print;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  justify-content: space-between;
+  gap: 8px;
+}
+.calc__tax {
+  grid-area: tax;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  justify-content: space-between;
+  gap: 8px;
+}
+.calc__sign {
+  grid-area: sign;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  justify-content: space-between;
+  gap: 8px;
+}
+.calc__percent {
+  grid-area: percent;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  justify-content: space-between;
+  gap: 8px;
+}
+.calc__clear {
+  grid-area: clear;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  justify-content: space-between;
+  gap: 8px;
+}
+.calc__memory {
+  grid-area: memory;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  justify-content: space-between;
+  gap: 8px;
+}
+.calc__numpad {
+  grid-area: numpad;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  justify-content: space-between;
+  gap: 8px;
+}
+.calc__operators {
+  grid-area: operators;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  justify-content: space-between;
+  gap: 8px;
 }/*# sourceMappingURL=style.css.map */

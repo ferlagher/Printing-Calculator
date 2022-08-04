@@ -1,5 +1,4 @@
 button {
-    @include font('btn', 'rgl', 'xl', var(--clr-txt));
     width: map-get($wdt, 'btn');
     height: map-get($wdt, 'btn');
     background-color: var(--clr-sec);

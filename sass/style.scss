@@ -1,7 +1,13 @@
 @import './abstracts/variables';
 @import './abstracts/mixins';
 
+@import './base/reset';
 @import './base/themes';
 @import './base/typography';
 
 @import './components/buttons';
+
+@import './layout/header';
+@import './layout/tape';
+@import './layout/body';
+@import './layout/calc';

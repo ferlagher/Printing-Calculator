@@ -1,0 +1,54 @@
+.calc { 
+    background-color: var(--clr-pri);
+/*     height: 0; */
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__display {
+        width: 100%;
+        height: 2em;
+        background-color: map-get($clr, 'bkg');
+        text-align: end;
+        position: relative;
+    }
+
+    &__digit {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0.5em map-get($spc, 'sm');
+        &--off {
+            opacity: 0.15;
+        }
+    }
+
+    $areas: ('margin', 'print', 'tax', 'sign', 'percent', 'clear', 'memory', 'numpad', 'operators');
+
+    &__buttons {
+        padding:  map-get($spc, 'sm');
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-areas: 
+            "#{nth($areas, 1)} #{nth($areas, 1)} #{nth($areas, 1)} #{nth($areas, 2)} #{nth($areas, 2)}"
+            "#{nth($areas, 3)} #{nth($areas, 3)} #{nth($areas, 4)} #{nth($areas, 5)} #{nth($areas, 5)}"
+            "#{nth($areas, 6)} #{nth($areas, 6)} #{nth($areas, 6)} #{nth($areas, 7)} #{nth($areas, 7)}"
+            "#{nth($areas, 8)} #{nth($areas, 8)} #{nth($areas, 8)} #{nth($areas, 7)} #{nth($areas, 7)}"
+            "#{nth($areas, 8)} #{nth($areas, 8)} #{nth($areas, 8)} #{nth($areas, 9)} #{nth($areas, 9)}";
+        gap: map-get($spc, 'sm');
+    }
+
+    @each $area in $areas {
+        &__#{$area} {
+            grid-area: #{$area};
+            display: flex;
+            flex-wrap: wrap-reverse;
+            justify-content: space-between;
+            gap:  map-get($spc, 'sm');
+            }
+    }
+}
+
