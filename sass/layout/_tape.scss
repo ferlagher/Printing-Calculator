@@ -1,4 +1,17 @@
 .tape {
     background-color: var(--clr-pri);
-    height: 100vh;
+    padding: map-get($spc, 'sm');
+    text-align: end;
+    overflow: scroll;
+    flex-shrink: 1;
+    flex-grow: 1;
+
+    &__clear {
+        text-align: center;
+        margin: 0.5em;
+    }
+    
+    &__items {
+        margin: 0.25em;
+    }
 }

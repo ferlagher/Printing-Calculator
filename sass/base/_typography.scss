@@ -14,3 +14,11 @@ button {
 .calc__display {
         @include font('dpy', 'bld', 'lg', map-get($clr, 'dpy'));
     }
+
+.tape {
+    @include font('tpe', 'rgl', 'md', var(--clr-txt));
+    
+    &__minus {
+        color: var(--clr-sub);
+    }
+}

@@ -1,9 +1,8 @@
 .calc { 
     background-color: var(--clr-pri);
-/*     height: 0; */
-    overflow: hidden;
-    position: fixed;
-    bottom: 0;
+    background-image: url(../images/bkgd.svg);
+    background-blend-mode: normal;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,6 +11,8 @@
     $areas: ('margin', 'print', 'tax', 'sign', 'percent', 'clear', 'memory', 'numpad', 'operators');
 
     &__buttons {
+/*         height: 0;
+        overflow: hidden; */
         padding:  map-get($spc, 'sm');
         display: grid;
         grid-template-columns: repeat(5, 1fr);
@@ -34,4 +35,3 @@
             }
     }
 }
-
