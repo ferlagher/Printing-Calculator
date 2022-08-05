@@ -2,17 +2,20 @@
     background-color: var(--clr-pri);
     background-image: url(../images/bkgd.svg);
     background-blend-mode: normal;
-    flex-shrink: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     box-shadow: 0 -6px 6px var(--clr-sdw);
 
+    &__resizer {
+        width: 100%;
+        text-align: center;
+    }
+
     $areas: ('margin', 'print', 'tax', 'sign', 'percent', 'clear', 'memory', 'numpad', 'operators');
 
     &__buttons {
-/*         height: 0;
-        overflow: hidden; */
+        overflow: hidden;
         padding:  map-get($spc, 'sm');
         display: grid;
         grid-template-columns: repeat(5, 1fr);

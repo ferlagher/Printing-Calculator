@@ -43,6 +43,13 @@ button {
   line-height: 0.5em;
 }
 
+.calc__resizer {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 1.25rem;
+  color: var(--clr-txt);
+  line-height: 0.75em;
+}
 .calc__display {
   font-family: "DSEG7", monospace;
   font-weight: 700;
@@ -202,15 +209,17 @@ header {
   background-color: var(--clr-pri);
   background-image: url(../images/bkgd.svg);
   background-blend-mode: normal;
-  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   box-shadow: 0 -6px 6px var(--clr-sdw);
 }
+.calc__resizer {
+  width: 100%;
+  text-align: center;
+}
 .calc__buttons {
-  /*         height: 0;
-          overflow: hidden; */
+  overflow: hidden;
   padding: 8px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);

@@ -11,9 +11,17 @@ button {
     line-height: 0.5em;
 }
 
-.calc__display {
+.calc {
+    &__resizer {
+        @include font('btn', 'rgl', 'md', var(--clr-txt));
+        line-height: 0.75em;
+    }
+
+    &__display {
         @include font('dpy', 'bld', 'lg', map-get($clr, 'dpy'));
     }
+}
+
 
 .tape {
     @include font('tpe', 'rgl', 'md', var(--clr-txt));
