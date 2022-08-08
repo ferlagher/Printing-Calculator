@@ -8,7 +8,7 @@ const moveCalc = btns => {
 
     //Mouse events
 
-    const mouseDown = e => {
+/*     const mouseDown = e => {
         y = e.clientY;
         h = parseInt(window.getComputedStyle(buttons).height);
         
@@ -27,7 +27,7 @@ const moveCalc = btns => {
     const mouseUp = () => {
         document.removeEventListener('mousemove', mouseMove);
         document.removeEventListener('mouseup', mouseUp);
-    }
+    } */
 
     //Touch events
 
@@ -52,7 +52,7 @@ const moveCalc = btns => {
         document.removeEventListener('touchend', touchEnd);
     }
 
-    resizer.addEventListener('mousedown', mouseDown);
+/*     resizer.addEventListener('mousedown', mouseDown); */
     resizer.addEventListener('touchstart', touchStart);
 }
 

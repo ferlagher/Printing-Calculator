@@ -1,6 +1,6 @@
 button {
-    width: map-get($wdt, 'btn');
-    height: map-get($wdt, 'btn');
+    width: map-get($siz, 'lg');
+    height: map-get($siz, 'lg');
     background-color: var(--clr-sec);
     border: none;
     border-radius: 8px;
@@ -29,12 +29,12 @@ button {
 .btn--sm {
     button {
         font-size: map-get($ft-sz, 'sm');
-        height: calc(map-get($wdt, 'btn') / 2);
+        height: map-get($siz, 'sm');
     }
 }
 
 .btn--md {
-    width: calc(map-get($wdt, 'btn') * 4/5);
-    height: calc(map-get($wdt, 'btn') * 4/5);
+    width: map-get($siz, 'md');
+    height: map-get($siz, 'md');
     padding: map-get($spc, 'sm');
 }

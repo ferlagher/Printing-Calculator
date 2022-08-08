@@ -37,13 +37,15 @@ $ft-wt: (
 
 $ft-sz: (
     xl: 2rem,
-    lg: 1.5rem,
+    lg: clamp(1.25rem, 8vw, 2rem),
     md: 1.25rem,
     sm: 1rem,
 );
 
-$wdt: (
-    btn: calc((100vw - 8px * 6) / 5),
+$siz: (
+    lg: min(calc((100vw - 8px * 6) / 5), 76px),
+    md: min(calc(((100vw - 8px * 6) / 5 ) * 4/5), 60.8px),
+    sm: min(calc(((100vw - 8px * 6) / 5) / 2), 38px),
 );
 
 $spc: (
