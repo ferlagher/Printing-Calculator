@@ -223,7 +223,7 @@ header {
   padding: 8px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-template-areas: "margin margin margin print print" "tax tax sign percent percent" "clear clear clear memory memory" "numpad numpad numpad memory memory" "numpad numpad numpad operators operators";
+  grid-template-areas: "margin margin margin items items" "tax tax sign percent percent" "clear clear clear memory memory" "numpad numpad numpad memory memory" "numpad numpad numpad operators operators";
   gap: 8px;
 }
 .calc__margin {
@@ -233,8 +233,8 @@ header {
   justify-content: space-between;
   gap: 8px;
 }
-.calc__print {
-  grid-area: print;
+.calc__items {
+  grid-area: items;
   display: flex;
   flex-wrap: wrap-reverse;
   justify-content: space-between;
