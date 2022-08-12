@@ -6,12 +6,20 @@
     flex-shrink: 1;
     flex-grow: 1;
 
+    &__minus {
+        color: var(--clr-sub);
+    }
+
     &__clear {
         text-align: center;
         margin: 0.5em;
     }
     
     &__items {
-        margin: 0.25em;
+        margin-right: 1em;
+    }
+
+    &__total {
+        margin-bottom: 1em;
     }
 }

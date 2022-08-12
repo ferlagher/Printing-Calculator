@@ -63,9 +63,6 @@ button {
   font-size: 1.25rem;
   color: var(--clr-txt);
 }
-.tape__minus {
-  color: var(--clr-sub);
-}
 
 svg {
   width: 100%;
@@ -197,12 +194,18 @@ header {
   flex-shrink: 1;
   flex-grow: 1;
 }
+.tape__minus {
+  color: var(--clr-sub);
+}
 .tape__clear {
   text-align: center;
   margin: 0.5em;
 }
 .tape__items {
-  margin: 0.25em;
+  margin-right: 1em;
+}
+.tape__total {
+  margin-bottom: 1em;
 }
 
 .calc {

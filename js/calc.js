@@ -19,17 +19,27 @@ const output = {
     print: function (int, op) {
         const li = document.createElement('li');
         if (op === '-' || int < 0) {
-            li.classList.add("tape__minus");
-        };
+            li.classList.add('tape__minus');
+        }
+        if(op === '*') {
+            li.classList.add('tape__total')
+        }
         li.innerHTML = toDecimal(int).toFixed(2) + ' ' + op;
         output.tape.appendChild(li);
-    }
+    },
+    items: function(sum) {
+        const li = document.createElement('li');
+        li.classList.add('tape__items');
+        li.innerHTML = String(sum.length).padStart(3, '0').padEnd(16, '·');
+        output.tape.appendChild(li);
+    },
 }
 
 //Memory
-let currentDigits = '0';
+let currentDigits = '';
 let currentSum = [];
 let total = 0;
+let grandSum = [];
 let grandTotal = 0;
 let factor = 1;
 let isMultiplicand = false;
@@ -43,15 +53,20 @@ const toDecimal = integer => integer / 100;
 for (let i = 0; i < input.numpad.length; i++) {
     input.numpad[i].addEventListener('click', e => {
         let id = input.numpad[i].id;
-        if ((id.includes('0') && currentDigits === '0') || (id === '.' && currentDigits.includes('.'))) {
+        if ((id.includes('0') && (currentDigits === '0')) || (id === '.' && currentDigits.includes('.'))) {
             output.updateDisplay(currentDigits);
         }
-        else if (id === '.' && currentDigits === '0') {
+        else if (id === '.' && (currentDigits === '0' || currentDigits === '')) {
             currentDigits = '0.'
             output.updateDisplay(currentDigits);
         }
-        else if (currentDigits === '0') {
-            currentDigits = id;
+        else if (currentDigits === '0' || currentDigits === '') {
+            if (id === '00') {
+                currentDigits = '0'
+            }
+            else {
+                currentDigits = id;
+            }
             output.updateDisplay(currentDigits);
         }
         else {
@@ -71,19 +86,14 @@ for (let i = 0; i < input.operators.length; i++) {
         let integerDigits = toInteger(currentDigits)
 
         const addAndPrint = op => {
-            if (currentDigits === '0') {
+            if (currentDigits === '') {
                 //Do nothing
             }
             else {
-                const roundDigits = integerDigits;
-                output.print(roundDigits, op);
-                currentDigits = '0';
-                if (op === '+' || op === '-'){
-                    total += parseInt(op+roundDigits);
-                }
-                else {
-                    total += parseInt(roundDigits);
-                }
+                output.print(integerDigits, op);
+                currentDigits = '';
+                currentSum.push(parseInt(op+integerDigits));
+                total = currentSum.reduce((x, y) => x + y, 0);
                 output.updateDisplay(toDecimal(total));
             }
         };
@@ -96,14 +106,20 @@ for (let i = 0; i < input.operators.length; i++) {
             else {
                 output.print (factor, op);
             }
-            currentDigits = '0';
+            currentDigits = '';
             isMultiplicand = op === '×';
             isDividend = op === '÷';
         }
 
         if (currentOperator === '+' || currentOperator === '-') {
             if (isMultiplicand && currentOperator === '+') {
-                total += (factor * integerDigits) / 100;
+                if (Array.isArray(factor)) {
+                    factor.forEach(x => currentSum.push((x * integerDigits) / 100))
+                }
+                else {
+                    currentSum.push((factor * integerDigits) / 100);
+                }
+                total = currentSum.reduce((x, y) => x + y, 0);
                 printProduct('=');
                 output.print(total, currentOperator);
             }
@@ -119,7 +135,7 @@ for (let i = 0; i < input.operators.length; i++) {
 
         else if (currentOperator === '×' || currentOperator === '÷') {
             factor = integerDigits;
-            if (total === 0 && currentDigits === '0') {
+            if (total === 0 && currentDigits === '') {
                 //Do nothing
             }
             else if (isMultiplicand) {
@@ -133,15 +149,36 @@ for (let i = 0; i < input.operators.length; i++) {
             else {
                 isMultiplicand = currentOperator === '×';
                 isDividend = currentOperator === '÷';
-                if (currentDigits === '0') {
+                if (currentDigits === '') {
                     factor = total;
                     printProduct(currentOperator)
-                    total = 0;
+                    factor = currentSum;
+                    currentSum = [];
                 }
                 else {
                     printProduct(currentOperator)
                 }
             }
+        }
+
+        else if (currentOperator === '*') {
+            output.items(currentSum);
+            output.print(total, currentOperator);
+            output.updateDisplay(toDecimal(total));
+            grandSum.push(total);
+            currentDigits = '';
+            currentSum = [];
+            total = 0;
+        }
+
+        else if (currentOperator === 'G*') {
+            grandTotal = grandSum.reduce((x, y) => x + y, 0);
+            output.items(grandSum);
+            output.print(grandTotal, '*');
+            output.updateDisplay(toDecimal(grandTotal));
+            currentDigits = '';
+            grandSum = [];
+            grandTotal = 0;
         }
     })
 };
