@@ -18,13 +18,13 @@ const output = {
     updateDisplay: function (data) {this.display.innerHTML = data},
     print: function (int, op) {
         const li = document.createElement('li');
-        if (op === '-' || int < 0) {
+        if ((op.includes('-') && !op.includes('%')) ||int < 0) {
             li.classList.add('tape__minus');
         }
-        if(op === '*') {
+        if(op === '*' || (op.includes('M') && !op.includes('%')) || isPercent) {
             li.classList.add('tape__total')
         }
-        li.innerHTML = toDecimal(int).toFixed(2) + ' ' + op;
+        li.innerHTML = toDecimal(int).toFixed(2) + ' ' + op.padEnd(2, ' ');
         output.tape.appendChild(li);
     },
     clear: function() {
@@ -39,7 +39,7 @@ const output = {
         li.innerHTML = String(arr.length).padStart(3, '0').padEnd(16, '·');
         output.tape.appendChild(li);
     },
-    separator: function(op) {
+    separator: function() {
         const li = document.createElement('li');
         li.classList.add('tape__total')
         li.innerHTML = ''.padStart(19, '·');
@@ -49,13 +49,18 @@ const output = {
 
 //Memory
 let digits = '';
+let integerDigits = 0;
 let sum = [];
 let total = 0;
 let grandSum = [];
 let grandTotal = 0;
+let memory = [];
+let memoryTotal = 0;
 let factor = 1;
+let percent = 0;
 let isMultiplicand = false;
 let isDividend = false;
+let isPercent = false;
 
 //Dealing with floats
 const toInteger = float => Math.round(parseFloat(float) * 100);
@@ -95,7 +100,7 @@ for (let i = 0; i < input.numpad.length; i++) {
 for (let i = 0; i < input.operators.length; i++) {
     input.operators[i].addEventListener('click', () => {
         let operator = input.operators[i].id;
-        let integerDigits = toInteger(digits)
+        integerDigits = toInteger(digits);
 
         const addAndPrint = op => {
             if (digits === '') {
@@ -104,7 +109,7 @@ for (let i = 0; i < input.operators.length; i++) {
             else {
                 output.print(integerDigits, op);
                 digits = '';
-                sum.push(parseInt(op+integerDigits));
+                sum.push(parseInt(op+1) * integerDigits);
                 total = sum.reduce((x, y) => x + y, 0);
                 output.updateDisplay(toDecimal(total));
             }
@@ -136,9 +141,22 @@ for (let i = 0; i < input.operators.length; i++) {
                 output.print(total, operator);
             }
             else if (isDividend && operator === '+') {
-                total += (factor / integerDigits) * 100;
+                if (Array.isArray(factor)) {
+                    factor.forEach(x => sum.push((x / integerDigits) * 100))
+                }
+                else {
+                    sum.push((factor / integerDigits) * 100);
+                }
+                total = sum.reduce((x, y) => x + y, 0);
                 printProduct('=');
                 output.print(total, operator);
+            }
+            else if (isPercent) {
+                digits = toDecimal(factor + parseInt(operator+1) * percent);
+                output.print(toInteger(digits), operator + '%');
+                output.updateDisplay(digits);
+                percent = 0;
+                isPercent = false;
             }
             else {
                 addAndPrint(operator)
@@ -184,7 +202,7 @@ for (let i = 0; i < input.operators.length; i++) {
         }
 
         else if (operator === 'G*') {
-            if (sum !== []){
+            if (sum.length){
                 output.items(sum);
                 output.print(total, '*');
                 output.updateDisplay(toDecimal(total));
@@ -216,9 +234,13 @@ for (let i = 0; i < input.clear.length; i++) {
             total = 0;
             grandSum = [];
             grandTotal = 0;
+            memory = [];
+            totalMemory = 0;
             factor = 1;
+            percent = 0;
             isMultiplicand = false;
             isDividend = false;
+            isPercent = false;
             output.clear();
             output.updateDisplay('0');
         }
@@ -238,4 +260,106 @@ for (let i = 0; i < input.clear.length; i++) {
             }
         }
     })
+}
+
+//Memory
+for (let i = 0; i < input.memory.length; i++) {
+    input.memory[i].addEventListener('click', () => {
+        let id = input.memory[i].id;
+        integerDigits = toInteger(digits);
+
+        const printMemory = (pr, sg, id) => {
+            memory.push(parseInt(sg+1) * pr);
+            output.print(integerDigits, '=')
+            output.print(pr, id)
+            output.updateDisplay(toDecimal(pr))
+            isMultiplicand = false;
+            isDividend = false;
+            digits = ''
+        }
+
+        if (id === 'M+' || id === 'M-') {
+            let sign = id.slice(1);
+            let product;
+            if (isMultiplicand) {
+                product = (factor * integerDigits) / 100;
+                printMemory(product, sign, id);
+            }
+            else if (isDividend) {
+                product = (factor / integerDigits) * 100;
+                printMemory(product, sign, id);
+            }
+        }
+
+        else if (id === 'M♢') {
+            output.items(memory);
+            totalMemory = memory.reduce((x, y) => x + y, 0);
+            output.print(totalMemory, id);
+            output.updateDisplay(toDecimal(totalMemory));
+        }
+
+        else if (id === 'M*') {
+            output.items(memory);
+            totalMemory = memory.reduce((x, y) => x + y, 0);
+            output.print(totalMemory, id);
+            output.updateDisplay(toDecimal(totalMemory));
+            output.separator();
+            digits = '';
+            memory = [];
+            totalMemory = 0;
+        }
+    });
+}
+
+//Sign
+input.sign[0].addEventListener('click', () => {
+    if (digits) {
+        digits = (-1 * digits).toString();
+        output.updateDisplay(digits);
+    }
+})
+
+//Percentages
+for (let i = 0; i < input.percent.length; i++) {
+    input.percent[i].addEventListener('click', () => {
+        let id = input.percent[i].id;
+        integerDigits = toInteger(digits);
+
+        const printPercent = (op) => {
+            output.print(integerDigits, op);
+            if (id === '%M'){
+                output.print(percent - factor, '·');
+            }
+            isPercent = true;
+            output.print(percent, '·');
+            output.updateDisplay(toDecimal(percent));
+            isMultiplicand = false;
+            isDividend = false;
+            digits = '';
+        }
+
+        if (id === '%') {
+            if (isMultiplicand) {
+                percent = (factor * digits) / 100;
+                printPercent(id);
+            }
+            if (isDividend) {
+                percent = (factor / digits) * 100;
+                printPercent(id);
+            }
+        }
+
+        else if (id === '%M') {
+            if (isMultiplicand) {
+                percent = factor / (1 - digits / 100);
+                printPercent(id);
+            }
+            if (isDividend) {
+                percent = factor / (1 + digits / 100);
+                printPercent(id);
+                digits = toDecimal(percent);
+                isPercent = false;
+            }
+        }
+    });
 }
