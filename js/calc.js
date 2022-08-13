@@ -18,7 +18,7 @@ const output = {
     updateDisplay: function (data) {this.display.innerHTML = data},
     print: function (int, op) {
         const li = document.createElement('li');
-        if ((op.includes('-') && !op.includes('%')) ||int < 0) {
+        if ((op.includes('-') && !(op.includes('%') || op.includes('T'))) ||int < 0) {
             li.classList.add('tape__minus');
         }
         if(op === '*' || (op.includes('M') && !op.includes('%')) || isPercent) {
@@ -58,6 +58,7 @@ let memory = [];
 let memoryTotal = 0;
 let factor = 1;
 let percent = 0;
+let taxRate = 22;
 let isMultiplicand = false;
 let isDividend = false;
 let isPercent = false;
@@ -361,5 +362,41 @@ for (let i = 0; i < input.percent.length; i++) {
                 isPercent = false;
             }
         }
+    });
+}
+
+//Tax calculations
+for (let i = 0; i < input.tax.length; i++) {
+    input.tax[i].addEventListener('click', () => {
+        let id = input.tax[i].id;
+        integerDigits = toInteger(digits);
+
+        if (id === '+T') {
+            factor = integerDigits;
+            output.print (factor, '-T');
+            output.print (toInteger(taxRate), '%T');
+            percent = (factor * taxRate) / 100;
+            isPercent = true;
+            output.print(percent, 'T');
+            digits = toDecimal(factor + percent);
+            output.print(toInteger(digits), id);
+            isPercent = false;
+            output.updateDisplay(digits);
+            percent = 0;
+        }
+
+        if (id === '-T') {
+            factor = integerDigits;
+            output.print (factor, '+T');
+            output.print (toInteger(taxRate), '%T');
+            percent = factor / (1 + taxRate / 100);
+            isPercent = true;
+            output.print(percent - factor, 'T');
+            digits = toDecimal(percent);
+            output.print(toInteger(digits), id);
+            isPercent = false;
+            output.updateDisplay(digits);
+            percent = 0;
+        } 
     });
 }
