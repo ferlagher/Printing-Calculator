@@ -100,211 +100,201 @@ let margin = 0;
 let marginAmount = 0;
 
 //Record number keys
-for (let i = 0; i < input.numpad.length; i++) {
-    input.numpad[i].addEventListener('click', () => {
-        let id = input.numpad[i].id;
-        if ((id.includes('0') && (digits === '0')) || (id === '.' && digits.includes('.'))) {
-            output.display(digits);
-        }
-        else if (id === '.' && (digits === '0' || digits === '')) {
-            digits = '0.'
-            output.display(digits);
-        }
-        else if (digits === '0' || digits === '') {
-            if (id === '00') {
-                digits = '0'
-            }
-            else {
-                digits = id;
-            }
-            output.display(digits);
+const numpad = key => {
+    if ((key.includes('0') && (digits === '0')) || (key === '.' && digits.includes('.'))) {
+        output.display(digits);
+    }
+    else if (key === '.' && (digits === '0' || digits === '')) {
+        digits = '0.'
+        output.display(digits);
+    }
+    else if (digits === '0' || digits === '') {
+        if (key === '00') {
+            digits = '0'
         }
         else {
-            digits += id;
-            if (digits >= 999999999999) {
-                digits = '999999999999'
-            }
-            output.display(digits);
+            digits = key;
         }
-    });
-};
+        output.display(digits);
+    }
+    else {
+        digits += key;
+        if (digits >= 999999999999) {
+            digits = '999999999999'
+        }
+        output.display(digits);
+    }
+}
 
 //Arithmetic
-for (let i = 0; i < input.operators.length; i++) {
-    input.operators[i].addEventListener('click', () => {
-        let operator = input.operators[i].id;
-        integerDigits = toInteger(digits);
+const arithmetics = key => {
+    integerDigits = toInteger(digits);
 
-        const addAndPrint = op => {
-            if (digits === '') {
-                //Do nothing
-            }
-            else {
-                output.print(integerDigits, op);
-                digits = '';
-                sum.push(parseInt(op+1) * integerDigits);
-                total = sum.reduce((x, y) => x + y, 0);
-                output.display(toDecimal(total));
-            }
-        };
-
-        const printProduct = op => {
-            if (op === '='){
-                output.print (integerDigits, op);
-                output.display(toDecimal(total));
-            }
-            else {
-                output.print (factor, op);
-            }
+    const addAndPrint = op => {
+        if (digits === '') {
+            //Do nothing
+        }
+        else {
+            output.print(integerDigits, op);
             digits = '';
-            isMultiplicand = op === '×';
-            isDividend = op === '÷';
+            sum.push(parseInt(op+1) * integerDigits);
+            total = sum.reduce((x, y) => x + y, 0);
+            output.display(toDecimal(total));
         }
+    };
 
-        if (operator === '+' || operator === '-') {
-            if (isMultiplicand && integerDigits) {
-                if (Array.isArray(factor)) {
-                    factor.forEach(x => sum.push((x * integerDigits) / 100));
-                    product = sum.reduce((x, y) => x + y, 0);
-                }
-                else {
-                    sum.push(parseInt(operator + 1) * (factor * integerDigits) / 100);
-                    product = (factor * integerDigits) / 100
-                }
-                printProduct('=');
-                output.print(product, operator);
-                output.display(toDecimal(product))
-                total = sum.reduce((x, y) => x + y, 0);
-            }
-            else if (isDividend && integerDigits) {
-                if (Array.isArray(factor)) {
-                    factor.forEach(x => sum.push((x / integerDigits) * 100))
-                    quotient = sum.reduce((x, y) => x + y, 0);
-                }
-                else {
-                    sum.push(parseInt(operator + 1) * (factor / integerDigits) * 100);
-                    quotient = (factor / integerDigits) * 100;
-                }
-                printProduct('=');
-                output.print(quotient, operator);
-                output.display(toDecimal(quotient))
-                total = sum.reduce((x, y) => x + y, 0);
-            }
-            else if (isPercent) {
-                digits = toDecimal(factor + parseInt(operator+1) * percent);
-                output.total(toInteger(digits), operator + '%');
-                output.display(digits);
-                percent = 0;
-                isPercent = false;
-            }
-            else if (integerDigits) {
-                addAndPrint(operator)
-            }
+    const printProduct = op => {
+        if (op === '='){
+            output.print (integerDigits, op);
+            output.display(toDecimal(total));
         }
+        else {
+            output.print (factor, op);
+        }
+        digits = '';
+        isMultiplicand = op === '×';
+        isDividend = op === '÷';
+    }
 
-        else if (operator === '×' || operator === '÷') {
-            factor = integerDigits;
-            if (total === 0 && digits === '') {
-                //Do nothing
-            }
-            else if (isMultiplicand) {
-                total = (factor * integerDigits) / 100;
-                printProduct(operator)
-            }
-            else if (isDividend) {
-                total = (factor / integerDigits) * 100;
-                printProduct(operator);
+    if (key === '+' || key === '-') {
+        if (isMultiplicand && integerDigits) {
+            if (Array.isArray(factor)) {
+                factor.forEach(x => sum.push((x * integerDigits) / 100));
+                product = sum.reduce((x, y) => x + y, 0);
             }
             else {
-                isMultiplicand = operator === '×';
-                isDividend = operator === '÷';
-                if (digits === '') {
-                    factor = total;
-                    printProduct(operator)
-                    factor = sum;
-                    sum = [];
-                }
-                else {
-                    printProduct(operator)
-                }
+                sum.push(parseInt(key + 1) * (factor * integerDigits) / 100);
+                product = (factor * integerDigits) / 100
+            }
+            printProduct('=');
+            output.print(product, key);
+            output.display(toDecimal(product))
+            total = sum.reduce((x, y) => x + y, 0);
+        }
+        else if (isDividend && integerDigits) {
+            if (Array.isArray(factor)) {
+                factor.forEach(x => sum.push((x / integerDigits) * 100))
+                quotient = sum.reduce((x, y) => x + y, 0);
+            }
+            else {
+                sum.push(parseInt(key + 1) * (factor / integerDigits) * 100);
+                quotient = (factor / integerDigits) * 100;
+            }
+            printProduct('=');
+            output.print(quotient, key);
+            output.display(toDecimal(quotient))
+            total = sum.reduce((x, y) => x + y, 0);
+        }
+        else if (isPercent) {
+            digits = toDecimal(factor + parseInt(key+1) * percent);
+            output.total(toInteger(digits), key + '%');
+            output.display(digits);
+            percent = 0;
+            isPercent = false;
+        }
+        else if (integerDigits) {
+            addAndPrint(key)
+        }
+    }
+
+    else if (key === '×' || key === '÷') {
+        factor = integerDigits;
+        if (total === 0 && digits === '') {
+            //Do nothing
+        }
+        else if (isMultiplicand) {
+            total = (factor * integerDigits) / 100;
+            printProduct(key)
+        }
+        else if (isDividend) {
+            total = (factor / integerDigits) * 100;
+            printProduct(key);
+        }
+        else {
+            isMultiplicand = key === '×';
+            isDividend = key === '÷';
+            if (digits === '') {
+                factor = total;
+                printProduct(key)
+                factor = sum;
+                sum = [];
+            }
+            else {
+                printProduct(key)
             }
         }
+    }
 
-        else if (operator === '*') {
+    else if (key === '*') {
+        output.items(sum);
+        output.total(total, key);
+        output.display(toDecimal(total));
+        grandSum.push(total);
+        digits = '';
+        sum = [];
+        total = 0;
+    }
+
+    else if (key === 'G*') {
+        if (sum.length){
             output.items(sum);
-            output.total(total, operator);
+            output.total(total, '*');
             output.display(toDecimal(total));
             grandSum.push(total);
             digits = '';
             sum = [];
             total = 0;
         }
-
-        else if (operator === 'G*') {
-            if (sum.length){
-                output.items(sum);
-                output.total(total, '*');
-                output.display(toDecimal(total));
-                grandSum.push(total);
-                digits = '';
-                sum = [];
-                total = 0;
-            }
-            grandTotal = grandSum.reduce((x, y) => x + y, 0);
-            output.items(grandSum);
-            output.total(grandTotal, '*');
-            output.separator()
-            output.display(toDecimal(grandTotal));
-            digits = '';
-            grandSum = [];
-            grandTotal = 0;
-        }
-    });
-};
+        grandTotal = grandSum.reduce((x, y) => x + y, 0);
+        output.items(grandSum);
+        output.total(grandTotal, '*');
+        output.separator()
+        output.display(toDecimal(grandTotal));
+        digits = '';
+        grandSum = [];
+        grandTotal = 0;
+    }
+}
 
 //Clear
-for (let i = 0; i < input.clear.length; i++) {
-    input.clear[i].addEventListener('click', () => {
-        let id = input.clear[i].id;
+const clear = key => {
+    if (key === 'CA') {
+        digits = '';
+        integerDigits = 0;
+        sum = [];
+        total = 0;
+        grandSum = [];
+        grandTotal = 0;
+        memory = [];
+        memoryTotal = 0;
+        factor = 1;
+        isMultiplicand = false;
+        isDividend = false;
+        percent = 0;
+        isPercent = false;
+        cost = 0;
+        sell = 0;
+        margin = 0;
+        marginAmount = 0;
+        output.clear();
+        output.display(0)
+    }
 
-        if (id === 'CA') {
-            digits = '';
-            integerDigits = 0;
-            sum = [];
-            total = 0;
-            grandSum = [];
-            grandTotal = 0;
-            memory = [];
-            memoryTotal = 0;
-            factor = 1;
-            isMultiplicand = false;
-            isDividend = false;
-            percent = 0;
-            isPercent = false;
-            cost = 0;
-            sell = 0;
-            margin = 0;
-            marginAmount = 0;
-            output.clear();
-            output.display(0)
-        }
+    else if (key === 'C') {
+        digits = '';
+        output.display('0');
+    }
 
-        else if (id === 'C') {
-            digits = '';
-            output.display('0');
+    else if (key === '>') {
+        digits = digits.slice(0, -1);
+        if (digits === '') {
+            output.display('0')
         }
-
-        else if (id === '>') {
-            digits = digits.slice(0, -1);
-            if (digits === '') {
-                output.display('0')
-            }
-            else {
-                output.display(digits)
-            }
+        else {
+            output.display(digits)
         }
-    });
-};
+    }
+}
 
 //Memory
 for (let i = 0; i < input.memory.length; i++) {
@@ -562,5 +552,59 @@ for (let i = 0; i < input.items.length; i++) {
             output.total(total, id);
             output.display(toDecimal(total))
         }
+    });
+};
+
+//event Listeners
+document.addEventListener('keydown', (e) => {
+    const numKeys = ['.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    const opKeys = ['+', '-'];
+    if (numKeys.includes(e.key)) {
+        numpad(e.key);
+    }
+    else if (opKeys.includes(e.key)) {
+        arithmetics(e.key);
+    }
+    else if (e.key === '*') {
+        arithmetics('×')
+    }
+    else if (e.key === '/') {
+        arithmetics('÷')
+    }
+    else if (e.key === 'Enter' && e.shiftKey) {
+        arithmetics('G*')
+    }
+    else if (e.key === 'Enter' && (isMultiplicand || isDividend || isPercent)) {
+        arithmetics('+')
+    }
+    else if (e.key === 'Enter') {
+        arithmetics('*')
+    }
+    else if (e.key === 'Backspace' && e.shiftKey) {
+        clear('CA')
+    }
+    else if (e.key === 'Backspace') {
+        clear('>')
+    }
+});
+
+for (let i = 0; i < input.numpad.length; i++) {
+    input.numpad[i].addEventListener('click', () => {
+        const key = input.numpad[i].id;
+        numpad(key);
+    });
+};
+
+for (let i = 0; i < input.operators.length; i++) {
+    input.operators[i].addEventListener('click', () => {
+        const key = input.operators[i].id;
+        arithmetics(key);
+    });
+};
+
+for (let i = 0; i < input.clear.length; i++) {
+    input.clear[i].addEventListener('click', () => {
+        let key = input.clear[i].id;
+        clear(key)
     });
 };
