@@ -36,6 +36,7 @@ const output = {
         }
         li.innerHTML = toDecimal(int).toFixed(2) + ' ' + op.padEnd(2, ' ');
         output.tape.appendChild(li);
+        li.scrollIntoView();
     },
     total: function (int, op) {
         const li = document.createElement('li');
@@ -45,24 +46,30 @@ const output = {
         }
         li.innerHTML = toDecimal(int).toFixed(2) + ' ' + op.padEnd(2, ' ');
         output.tape.appendChild(li);
+        li.scrollIntoView();
+
     },
     clear: function() {
         const li = document.createElement('li');
         li.classList.add('tape__clear');
         li.innerHTML = '····0····';
         output.tape.appendChild(li);
+        li.scrollIntoView();
+
     },
     items: function(arr) {
         const li = document.createElement('li');
         li.classList.add('tape__items');
         li.innerHTML = String(arr.length).padStart(3, '0').padEnd(16, '·');
         output.tape.appendChild(li);
+        li.scrollIntoView();
     },
     separator: function() {
         const li = document.createElement('li');
         li.classList.add('tape__total')
         li.innerHTML = ''.padStart(19, '·');
         output.tape.appendChild(li);
+        li.scrollIntoView();
     },
 };
 
@@ -157,26 +164,30 @@ for (let i = 0; i < input.operators.length; i++) {
         if (operator === '+' || operator === '-') {
             if (isMultiplicand && integerDigits) {
                 if (Array.isArray(factor)) {
-                    factor.forEach(x => sum.push((x * integerDigits) / 100))
+                    factor.forEach(x => sum.push((x * integerDigits) / 100));
+                    product = sum.reduce((x, y) => x + y, 0);
                 }
                 else {
                     sum.push(parseInt(operator + 1) * (factor * integerDigits) / 100);
+                    product = (factor * integerDigits) / 100
                 }
                 printProduct('=');
-                output.print((factor * integerDigits) / 100, operator);
-                output.display(toDecimal((factor * integerDigits) / 100))
+                output.print(product, operator);
+                output.display(toDecimal(product))
                 total = sum.reduce((x, y) => x + y, 0);
             }
             else if (isDividend && integerDigits) {
                 if (Array.isArray(factor)) {
                     factor.forEach(x => sum.push((x / integerDigits) * 100))
+                    quotient = sum.reduce((x, y) => x + y, 0);
                 }
                 else {
                     sum.push(parseInt(operator + 1) * (factor / integerDigits) * 100);
+                    quotient = (factor / integerDigits) * 100;
                 }
                 printProduct('=');
-                output.print((factor / integerDigits) * 100, operator);
-                output.display(toDecimal((factor / integerDigits) * 100))
+                output.print(quotient, operator);
+                output.display(toDecimal(quotient))
                 total = sum.reduce((x, y) => x + y, 0);
             }
             else if (isPercent) {
