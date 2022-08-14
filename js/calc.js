@@ -155,27 +155,29 @@ for (let i = 0; i < input.operators.length; i++) {
         }
 
         if (operator === '+' || operator === '-') {
-            if (isMultiplicand && integerDigits && operator === '+') {
+            if (isMultiplicand && integerDigits) {
                 if (Array.isArray(factor)) {
                     factor.forEach(x => sum.push((x * integerDigits) / 100))
                 }
                 else {
-                    sum.push((factor * integerDigits) / 100);
+                    sum.push(parseInt(operator + 1) * (factor * integerDigits) / 100);
                 }
-                total = sum.reduce((x, y) => x + y, 0);
                 printProduct('=');
-                output.print(total, operator);
+                output.print((factor * integerDigits) / 100, operator);
+                output.display(toDecimal((factor * integerDigits) / 100))
+                total = sum.reduce((x, y) => x + y, 0);
             }
-            else if (isDividend && integerDigits && operator === '+') {
+            else if (isDividend && integerDigits) {
                 if (Array.isArray(factor)) {
                     factor.forEach(x => sum.push((x / integerDigits) * 100))
                 }
                 else {
-                    sum.push((factor / integerDigits) * 100);
+                    sum.push(parseInt(operator + 1) * (factor / integerDigits) * 100);
                 }
-                total = sum.reduce((x, y) => x + y, 0);
                 printProduct('=');
-                output.print(total, operator);
+                output.print((factor / integerDigits) * 100, operator);
+                output.display(toDecimal((factor / integerDigits) * 100))
+                total = sum.reduce((x, y) => x + y, 0);
             }
             else if (isPercent) {
                 digits = toDecimal(factor + parseInt(operator+1) * percent);
