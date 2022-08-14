@@ -258,41 +258,43 @@ const arithmetics = key => {
 
 //Clear
 const clear = key => {
-    if (key === 'CA') {
-        digits = '';
-        integerDigits = 0;
-        sum = [];
-        total = 0;
-        grandSum = [];
-        grandTotal = 0;
-        memory = [];
-        memoryTotal = 0;
-        factor = 1;
-        isMultiplicand = false;
-        isDividend = false;
-        percent = 0;
-        isPercent = false;
-        cost = 0;
-        sell = 0;
-        margin = 0;
-        marginAmount = 0;
-        output.clear();
-        output.display(0)
-    }
+    switch (key) {
+        case 'CA':
+            digits = '';
+            integerDigits = 0;
+            sum = [];
+            total = 0;
+            grandSum = [];
+            grandTotal = 0;
+            memory = [];
+            memoryTotal = 0;
+            factor = 1;
+            isMultiplicand = false;
+            isDividend = false;
+            percent = 0;
+            isPercent = false;
+            cost = 0;
+            sell = 0;
+            margin = 0;
+            marginAmount = 0;
+            output.clear();
+            output.display(0)
+            break
 
-    else if (key === 'C') {
-        digits = '';
-        output.display('0');
-    }
+        case 'C':
+            digits = '';
+            output.display('0');
+            break
 
-    else if (key === '>') {
-        digits = digits.slice(0, -1);
-        if (digits === '') {
-            output.display('0')
-        }
-        else {
-            output.display(digits)
-        }
+        case '>':
+            digits = digits.slice(0, -1);
+            if (digits === '') {
+                output.display('0')
+            }
+            else {
+                output.display(digits)
+            }
+            break
     }
 }
 
@@ -452,7 +454,8 @@ for (let i = 0; i < input.margin.length; i++) {
         let id = input.margin[i].id;
         integerDigits = toInteger(digits);
 
-        if (id === '♢♢') {
+        switch (id) {
+        case '♢♢':
             if (cost) {
                 output.total(cost, id);
                 output.display(toDecimal(cost));
@@ -471,9 +474,9 @@ for (let i = 0; i < input.margin.length; i++) {
                 output.print(cost, id);
                 digits = '';
             }
-        }
+            break
 
-        else if (id === '**') {
+        case '**':
             if (sell) {
                 output.total(sell, id);
                 output.display(toDecimal(sell))
@@ -492,9 +495,9 @@ for (let i = 0; i < input.margin.length; i++) {
                 output.print(sell, id);
                 digits = '';
             }
-        }
+            break
 
-        else if (id === 'MT') {
+        case 'MT':
             if (margin && marginAmount) {
                 output.print(toInteger(margin), '%M');
                 output.total(marginAmount, id);
@@ -531,6 +534,7 @@ for (let i = 0; i < input.margin.length; i++) {
                 output.display(toDecimal(cost))
                 digits = '';
             }
+            break
         }
     });
 };
@@ -540,17 +544,19 @@ for (let i = 0; i < input.items.length; i++) {
     input.items[i].addEventListener('click', () => {
         let id = input.items[i].id;
 
-        if (id === '#') {
+        switch (id) {
+        case '#':
             let average = total / sum.length;
             output.items(sum);
             output.total(average, id);
             output.display(toDecimal(average))
-
-        }
-        else if (id === '♢') {
+            break
+        
+        case '♢':
             output.items(sum);
             output.total(total, id);
             output.display(toDecimal(total))
+            break
         }
     });
 };
