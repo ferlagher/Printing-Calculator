@@ -17,9 +17,9 @@ const toDecimal = integer => integer / 100;
 
 //Output
 const output = {
-    display: document.querySelector('.calc__digit'),
+    screen: document.querySelector('.calc__digit'),
     tape: document.querySelector('.tape__list'),
-    updateDisplay: function (number) {
+    display: function (number) {
         if (number > 999999999999) {
             number = Error
         }
@@ -27,15 +27,21 @@ const output = {
             excedent = 12 - String(number).replace('.', '').length;
             number = String(number).slice(0, excedent);
         }
-        this.display.innerHTML = number;
+        this.screen.innerHTML = number;
     },
     print: function (int, op) {
         const li = document.createElement('li');
         if ((op.includes('-') && !(op.includes('%') || op.includes('T'))) ||int < 0) {
             li.classList.add('tape__minus');
         }
-        if(op === '*' || (op.includes('M') && !op.includes('%')) || isPercent) {
-            li.classList.add('tape__total')
+        li.innerHTML = toDecimal(int).toFixed(2) + ' ' + op.padEnd(2, ' ');
+        output.tape.appendChild(li);
+    },
+    total: function (int, op) {
+        const li = document.createElement('li');
+        li.classList.add('tape__total')
+        if ((op.includes('-') && !(op.includes('%') || op.includes('T'))) ||int < 0) {
+            li.classList.add('tape__minus');
         }
         li.innerHTML = toDecimal(int).toFixed(2) + ' ' + op.padEnd(2, ' ');
         output.tape.appendChild(li);
@@ -91,11 +97,11 @@ for (let i = 0; i < input.numpad.length; i++) {
     input.numpad[i].addEventListener('click', () => {
         let id = input.numpad[i].id;
         if ((id.includes('0') && (digits === '0')) || (id === '.' && digits.includes('.'))) {
-            output.updateDisplay(digits);
+            output.display(digits);
         }
         else if (id === '.' && (digits === '0' || digits === '')) {
             digits = '0.'
-            output.updateDisplay(digits);
+            output.display(digits);
         }
         else if (digits === '0' || digits === '') {
             if (id === '00') {
@@ -104,14 +110,14 @@ for (let i = 0; i < input.numpad.length; i++) {
             else {
                 digits = id;
             }
-            output.updateDisplay(digits);
+            output.display(digits);
         }
         else {
             digits += id;
             if (digits >= 999999999999) {
                 digits = '999999999999'
             }
-            output.updateDisplay(digits);
+            output.display(digits);
         }
     });
 };
@@ -131,14 +137,14 @@ for (let i = 0; i < input.operators.length; i++) {
                 digits = '';
                 sum.push(parseInt(op+1) * integerDigits);
                 total = sum.reduce((x, y) => x + y, 0);
-                output.updateDisplay(toDecimal(total));
+                output.display(toDecimal(total));
             }
         };
 
         const printProduct = op => {
             if (op === '='){
                 output.print (integerDigits, op);
-                output.updateDisplay(toDecimal(total));
+                output.display(toDecimal(total));
             }
             else {
                 output.print (factor, op);
@@ -149,7 +155,7 @@ for (let i = 0; i < input.operators.length; i++) {
         }
 
         if (operator === '+' || operator === '-') {
-            if (isMultiplicand && operator === '+') {
+            if (isMultiplicand && integerDigits && operator === '+') {
                 if (Array.isArray(factor)) {
                     factor.forEach(x => sum.push((x * integerDigits) / 100))
                 }
@@ -160,7 +166,7 @@ for (let i = 0; i < input.operators.length; i++) {
                 printProduct('=');
                 output.print(total, operator);
             }
-            else if (isDividend && operator === '+') {
+            else if (isDividend && integerDigits && operator === '+') {
                 if (Array.isArray(factor)) {
                     factor.forEach(x => sum.push((x / integerDigits) * 100))
                 }
@@ -173,12 +179,12 @@ for (let i = 0; i < input.operators.length; i++) {
             }
             else if (isPercent) {
                 digits = toDecimal(factor + parseInt(operator+1) * percent);
-                output.print(toInteger(digits), operator + '%');
-                output.updateDisplay(digits);
+                output.total(toInteger(digits), operator + '%');
+                output.display(digits);
                 percent = 0;
                 isPercent = false;
             }
-            else {
+            else if (integerDigits) {
                 addAndPrint(operator)
             }
         }
@@ -213,8 +219,8 @@ for (let i = 0; i < input.operators.length; i++) {
 
         else if (operator === '*') {
             output.items(sum);
-            output.print(total, operator);
-            output.updateDisplay(toDecimal(total));
+            output.total(total, operator);
+            output.display(toDecimal(total));
             grandSum.push(total);
             digits = '';
             sum = [];
@@ -224,8 +230,8 @@ for (let i = 0; i < input.operators.length; i++) {
         else if (operator === 'G*') {
             if (sum.length){
                 output.items(sum);
-                output.print(total, '*');
-                output.updateDisplay(toDecimal(total));
+                output.total(total, '*');
+                output.display(toDecimal(total));
                 grandSum.push(total);
                 digits = '';
                 sum = [];
@@ -233,9 +239,9 @@ for (let i = 0; i < input.operators.length; i++) {
             }
             grandTotal = grandSum.reduce((x, y) => x + y, 0);
             output.items(grandSum);
-            output.print(grandTotal, '*');
+            output.total(grandTotal, '*');
             output.separator()
-            output.updateDisplay(toDecimal(grandTotal));
+            output.display(toDecimal(grandTotal));
             digits = '';
             grandSum = [];
             grandTotal = 0;
@@ -267,21 +273,21 @@ for (let i = 0; i < input.clear.length; i++) {
             margin = 0;
             marginAmount = 0;
             output.clear();
-            output.updateDisplay(0)
+            output.display(0)
         }
 
         else if (id === 'C') {
             digits = '';
-            output.updateDisplay('0');
+            output.display('0');
         }
 
         else if (id === '>') {
             digits = digits.slice(0, -1);
             if (digits === '') {
-                output.updateDisplay('0')
+                output.display('0')
             }
             else {
-                output.updateDisplay(digits)
+                output.display(digits)
             }
         }
     });
@@ -296,8 +302,8 @@ for (let i = 0; i < input.memory.length; i++) {
         const printMemory = (pr, sg, id) => {
             memory.push(parseInt(sg+1) * pr);
             output.print(integerDigits, '=')
-            output.print(pr, id)
-            output.updateDisplay(toDecimal(pr))
+            output.total(pr, id)
+            output.display(toDecimal(pr))
             isMultiplicand = false;
             isDividend = false;
             digits = ''
@@ -319,15 +325,15 @@ for (let i = 0; i < input.memory.length; i++) {
         else if (id === 'M♢') {
             output.items(memory);
             totalMemory = memory.reduce((x, y) => x + y, 0);
-            output.print(totalMemory, id);
-            output.updateDisplay(toDecimal(totalMemory));
+            output.total(totalMemory, id);
+            output.display(toDecimal(totalMemory));
         }
 
         else if (id === 'M*') {
             output.items(memory);
             totalMemory = memory.reduce((x, y) => x + y, 0);
-            output.print(totalMemory, id);
-            output.updateDisplay(toDecimal(totalMemory));
+            output.total(totalMemory, id);
+            output.display(toDecimal(totalMemory));
             output.separator();
             digits = '';
             memory = [];
@@ -340,7 +346,7 @@ for (let i = 0; i < input.memory.length; i++) {
 input.sign[0].addEventListener('click', () => {
     if (digits) {
         digits = (-1 * digits).toString();
-        output.updateDisplay(digits);
+        output.display(digits);
     }
 });
 
@@ -355,9 +361,8 @@ for (let i = 0; i < input.percent.length; i++) {
             if (id === '%M'){
                 output.print(percent - factor, '·');
             }
-            isPercent = true;
-            output.print(percent, '·');
-            output.updateDisplay(toDecimal(percent));
+            output.total(percent, '·');
+            output.display(toDecimal(percent));
             isMultiplicand = false;
             isDividend = false;
             digits = '';
@@ -367,10 +372,12 @@ for (let i = 0; i < input.percent.length; i++) {
             if (isMultiplicand) {
                 percent = (factor * digits) / 100;
                 printPercent(id);
+                isPercent = true;
             }
             if (isDividend) {
                 percent = (factor / digits) * 100;
                 printPercent(id);
+                isPercent = true;
             }
         }
 
@@ -383,7 +390,6 @@ for (let i = 0; i < input.percent.length; i++) {
                 percent = factor / (1 + digits / 100);
                 printPercent(id);
                 digits = toDecimal(percent);
-                isPercent = false;
             }
         }
     });
@@ -408,12 +414,10 @@ for (let i = 0; i < input.tax.length; i++) {
             output.print (factor, '-T');
             output.print (toInteger(taxRate), '%T');
             percent = (factor * taxRate) / 100;
-            isPercent = true;
-            output.print(percent, 'T');
+            output.total(percent, 'T');
             digits = toDecimal(factor + percent);
-            output.print(toInteger(digits), id);
-            isPercent = false;
-            output.updateDisplay(digits);
+            output.total(toInteger(digits), id);
+            output.display(digits);
             percent = 0;
         }
 
@@ -430,12 +434,10 @@ for (let i = 0; i < input.tax.length; i++) {
             output.print (factor, '+T');
             output.print (toInteger(taxRate), '%T');
             percent = factor / (1 + taxRate / 100);
-            isPercent = true;
-            output.print(percent - factor, 'T');
+            output.total(percent - factor, 'T');
             digits = toDecimal(percent);
-            output.print(toInteger(digits), id);
-            isPercent = false;
-            output.updateDisplay(digits);
+            output.total(toInteger(digits), id);
+            output.display(digits);
             percent = 0;
         } 
     });
@@ -449,8 +451,8 @@ for (let i = 0; i < input.margin.length; i++) {
 
         if (id === '♢♢') {
             if (cost) {
-                output.print(cost, id);
-                output.updateDisplay(toDecimal(cost));
+                output.total(cost, id);
+                output.display(toDecimal(cost));
                 digits = '';
                 cost = 0;
             }
@@ -458,8 +460,8 @@ for (let i = 0; i < input.margin.length; i++) {
                 cost = integerDigits;
                 output.print(cost, id);
                 margin = toDecimal(toInteger(100 - 100 / (sell / cost)));
-                output.print(toInteger(margin), '%M');
-                output.updateDisplay(margin);
+                output.total(toInteger(margin), '%M');
+                output.display(margin);
             }
             else if (integerDigits) {
                 cost = integerDigits;
@@ -470,8 +472,8 @@ for (let i = 0; i < input.margin.length; i++) {
 
         else if (id === '**') {
             if (sell) {
-                output.print(sell, id);
-                output.updateDisplay(toDecimal(sell))
+                output.total(sell, id);
+                output.display(toDecimal(sell))
                 digits = '';
                 sell = 0;
             }
@@ -479,7 +481,7 @@ for (let i = 0; i < input.margin.length; i++) {
                 sell = integerDigits;
                 output.print(sell, id);
                 margin = toDecimal(toInteger(100 - cost / (sell / 100)));
-                output.print(toInteger(margin), '%M');
+                output.total(toInteger(margin), '%M');
                 digits = '';
             }
             else if (integerDigits) {
@@ -492,16 +494,16 @@ for (let i = 0; i < input.margin.length; i++) {
         else if (id === 'MT') {
             if (margin && marginAmount) {
                 output.print(toInteger(margin), '%M');
-                output.print(marginAmount, id);
-                output.updateDisplay(toDecimal(marginAmount))
+                output.total(marginAmount, id);
+                output.display(toDecimal(marginAmount))
                 digits = '';
                 margin = 0;
                 marginAmount = 0;
             }
             else if(margin && !marginAmount) {
                 marginAmount = toDecimal(toInteger(sell * margin / 100));
-                output.print(marginAmount, id);
-                output.updateDisplay(toDecimal(marginAmount))
+                output.total(marginAmount, id);
+                output.display(toDecimal(marginAmount))
                 digits = '';
                 margin = 0;
                 marginAmount = 0;
@@ -513,8 +515,8 @@ for (let i = 0; i < input.margin.length; i++) {
                 output.print(toInteger(margin), '%M');
                 sell = toDecimal(toInteger(cost / (1 - margin / 100)));
                 marginAmount = toDecimal(toInteger(sell * margin / 100));
-                output.print(sell, '**')
-                output.updateDisplay(toDecimal(sell))
+                output.total(sell, '**')
+                output.display(toDecimal(sell))
                 digits = '';
             }
             else if (sell && integerDigits) {
@@ -522,12 +524,11 @@ for (let i = 0; i < input.margin.length; i++) {
                 output.print(toInteger(margin), '%M')
                 marginAmount = toDecimal(toInteger(sell * margin / 100));
                 cost = sell - marginAmount;
-                output.print(cost, '♢♢');
-                output.updateDisplay(toDecimal(cost))
+                output.total(cost, '♢♢');
+                output.display(toDecimal(cost))
                 digits = '';
             }
         }
-        console.log(cost, sell, margin, marginAmount)
     });
 };
 
@@ -536,11 +537,17 @@ for (let i = 0; i < input.items.length; i++) {
     input.items[i].addEventListener('click', () => {
         let id = input.items[i].id;
 
-        if (id = '#') {
+        if (id === '#') {
+            let average = total / sum.length;
+            output.items(sum);
+            output.total(average, id);
+            output.display(toDecimal(average))
 
         }
-        else if (id = '♢') {
-
+        else if (id === '♢') {
+            output.items(sum);
+            output.total(total, id);
+            output.display(toDecimal(total))
         }
     });
 };
