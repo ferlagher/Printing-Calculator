@@ -1,10 +1,10 @@
 .tape {
     background-color: var(--clr-bkg);
+    width: 100%;
     padding: map-get($spc, 'sm');
     text-align: end;
-    overflow: scroll;
-    flex-shrink: 1;
-    flex-grow: 1;
+    overflow: auto;
+    flex: 1;
 
     &__minus {
         color: var(--clr-sub);

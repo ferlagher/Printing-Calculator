@@ -229,7 +229,9 @@ const arithmetics = key => {
         output.items(sum);
         output.total(total, key);
         output.display(toDecimal(total));
-        grandSum.push(total);
+        if (total) {
+            grandSum.push(total);
+        }
         digits = '';
         sum = [];
         total = 0;
@@ -240,7 +242,9 @@ const arithmetics = key => {
             output.items(sum);
             output.total(total, '*');
             output.display(toDecimal(total));
-            grandSum.push(total);
+            if (total) {
+                grandSum.push(total);
+            }
             digits = '';
             sum = [];
             total = 0;

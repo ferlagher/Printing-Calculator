@@ -1,14 +1,14 @@
 .calc { 
     background-color: var(--clr-pri);
     background-image: url(../images/bkgd.svg);
-    max-width: 426px;
+    width: min(426px, 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
     box-shadow: 0 0 8px 4px var(--clr-sdw);
     border-radius: 10px;
     overflow: hidden;
-    transition: height 2s ease-in-out;
+    transition: max-height 1s ease-in-out;
 
     &__resizer {
         width: 100%;
@@ -20,13 +20,14 @@
             position: absolute;
             top: 0;
             left: 0;
+            z-index: 99;
         }
         input {
             width: 0;
             height: 0;
         }
         svg {
-            transition: 0.3s 0.7s ease-in-out;
+            transition: transform 0.3s 0.7s ease-in-out;
         }
     }
 
@@ -45,7 +46,7 @@
             "#{nth($areas, 8)} #{nth($areas, 8)} #{nth($areas, 8)} #{nth($areas, 7)} #{nth($areas, 7)}"
             "#{nth($areas, 8)} #{nth($areas, 8)} #{nth($areas, 8)} #{nth($areas, 9)} #{nth($areas, 9)}";
         gap: map-get($spc, 'sm');
-        transition: height 1s ease-in-out;
+        transition: max-height 1s ease-in-out;
     }
 
     @each $area in $areas {
@@ -60,7 +61,6 @@
 }
 
 .calc__buttons--hidden {
-    transition: height 1s ease-in-out;
     max-height: 0px;
     padding-top: 0px;
     padding-bottom: 0px;

@@ -149,11 +149,11 @@ header {
 
 .tape {
   background-color: var(--clr-bkg);
+  width: 100%;
   padding: 8px;
   text-align: end;
-  overflow: scroll;
-  flex-shrink: 1;
-  flex-grow: 1;
+  overflow: auto;
+  flex: 1;
 }
 .tape__minus {
   color: var(--clr-sub);
@@ -172,14 +172,14 @@ header {
 .calc {
   background-color: var(--clr-pri);
   background-image: url(../images/bkgd.svg);
-  max-width: 426px;
+  width: min(426px, 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
   box-shadow: 0 0 8px 4px var(--clr-sdw);
   border-radius: 10px;
   overflow: hidden;
-  transition: height 2s ease-in-out;
+  transition: max-height 1s ease-in-out;
 }
 .calc__resizer {
   width: 100%;
@@ -192,13 +192,14 @@ header {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 99;
 }
 .calc__resizer input {
   width: 0;
   height: 0;
 }
 .calc__resizer svg {
-  transition: 0.3s 0.7s ease-in-out;
+  transition: transform 0.3s 0.7s ease-in-out;
 }
 .calc__buttons {
   max-height: 550px;
@@ -208,7 +209,7 @@ header {
   grid-template-columns: repeat(5, 1fr);
   grid-template-areas: "margin margin margin items items" "tax tax sign percent percent" "clear clear clear memory memory" "numpad numpad numpad memory memory" "numpad numpad numpad operators operators";
   gap: 8px;
-  transition: height 1s ease-in-out;
+  transition: max-height 1s ease-in-out;
 }
 .calc__margin {
   grid-area: margin;
@@ -275,7 +276,6 @@ header {
 }
 
 .calc__buttons--hidden {
-  transition: height 1s ease-in-out;
   max-height: 0px;
   padding-top: 0px;
   padding-bottom: 0px;
