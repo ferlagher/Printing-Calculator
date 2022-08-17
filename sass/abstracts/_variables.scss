@@ -1,5 +1,6 @@
 $thm: (
     drk: (
+        bkg: #292929,
         pri: #323232,
         sec: #404040,
         ter: #5A5D5F,
@@ -9,6 +10,7 @@ $thm: (
         sdw: rgba(29, 29, 29, 0.4), 
     ),
     lgt: (
+        bkg: #b6b6b6,
         pri: #D4D4D4,
         sec: #F2F2F3,
         ter: #A7B4BD,
@@ -43,8 +45,8 @@ $ft-sz: (
 );
 
 $siz: (
-    lg: min(calc((100vw - 8px * 6) / 5), 76px),
-    md: min(calc(((100vw - 8px * 6) / 5 ) * 4/5), 60.8px),
+    lg: min(calc((100vw - 8px * 6) / 5), 75px),
+    md: min(calc(((100vw - 8px * 6) / 5 ) * 4/5), 50px),
     sm: min(calc(((100vw - 8px * 6) / 5) / 2), 38px),
 );
 

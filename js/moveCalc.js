@@ -1,34 +1,14 @@
-const moveCalc = btns => {
-    const buttons = document.querySelector(btns);
-    const resizer = document.querySelector('.calc__resizer');
-    const maxh =  parseInt(window.getComputedStyle(buttons).height);
+const buttons = document.querySelector('.calc__buttons');
+const resizer = document.getElementById('calc__checkbox');
+const svg = document.querySelector('.calc__svg');
 
-    let y ;
-    let h ;
-
-    //Touch events
-    const touchStart = e => {
-        y = e.touches[0].clientY;
-        h = parseInt(window.getComputedStyle(buttons).height);
-        
-        document.addEventListener('touchmove', touchMove);
-        document.addEventListener('touchend', touchEnd);
-    };
-
-    const touchMove = e => {
-        const dy = e.touches[0].clientY - y;
-        
-        if (h - dy <= maxh){
-            buttons.style.height = `${h - dy}px`;
-        };
+resizer.addEventListener('click', () => {
+    if (resizer.checked) {
+        buttons.classList.remove('calc__buttons--hidden');
+        svg.classList.remove('calc__svg--rotate');
     }
-
-    const touchEnd = () => {
-        document.removeEventListener('touchmove', touchMove);
-        document.removeEventListener('touchend', touchEnd);
+    else if (!resizer.checked) {
+        buttons.classList.add('calc__buttons--hidden');
+        svg.classList.add('calc__svg--rotate');
     }
-
-    resizer.addEventListener('touchstart', touchStart);
-}
-
-moveCalc('.calc__buttons')
+});

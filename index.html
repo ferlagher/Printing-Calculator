@@ -10,17 +10,13 @@
 <link rel="icon" type="image/png" href="./images/favicon.png">
     <link rel="stylesheet" href="./css/style.css">
 
-    <title>Printing Calculator</title>
+    <title>Quasi0 Calculator</title>
 </head>
 
 <body data-theme="drk">
     <header>
         <button id="theme" class="btn--md">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -15 430 430">
-                <g class="moon"><path class="cls-1" d="M64.1656,54.1651A200.3373,200.3373,0,0,1,232.18,3,145.8629,145.8629,0,1,0,398.6393,173.1137,201.048,201.048,0,0,1,400.5,200.5c0,110.46-89.54,200-200,200S.5,310.96.5,200.5A199.4542,199.4542,0,0,1,64.1656,54.1651Z"/></g>
-                <g class="sun"><circle class="cls-1" cx="200.5" cy="200.5" r="114.2766"/></g>
-                <g class="beams"><line class="cls-1" x1="200.5" y1="62.7766" x2="200.5" y2="0.5"/><line class="cls-1" x1="297.8852" y1="103.1148" x2="341.9214" y2="59.0786"/><line class="cls-1" x1="338.2234" y1="200.5" x2="400.5" y2="200.5"/><line class="cls-1" x1="297.8852" y1="297.8852" x2="341.9214" y2="341.9214"/><line class="cls-1" x1="200.5" y1="338.2234" x2="200.5" y2="400.5"/><line class="cls-1" x1="103.1148" y1="297.8852" x2="59.0786" y2="341.9214"/><line class="cls-1" x1="62.7766" y1="200.5" x2="0.5" y2="200.5"/><line class="cls-1" x1="103.1148" y1="103.1148" x2="59.0786" y2="59.0786"/></g>
-            </svg>
+            <svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M14.83 16.42l9.17 9.17 9.17-9.17 2.83 2.83-12 12-12-12z"/></svg>
         </button>
     </header>
     <main>
@@ -29,7 +25,12 @@
             </ul>
         </div>
         <div class="calc">
-            <div class="calc__resizer">=</div>
+            <div class="calc__resizer">
+                <label for="calc__checkbox">
+                </label>
+                <input id="calc__checkbox" name="resizer" type="checkbox" checked>
+                <svg class="calc__svg" width="24" height="24" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M14.83 16.42l9.17 9.17 9.17-9.17 2.83 2.83-12 12-12-12z"/></svg>
+            </div>
             <div class="calc__display">
                 <span class="calc__digit">0</span>
                 <span class="calc__digit calc__digit--off">8.8.8.8.8.8.8.8.8.8.8.8.</span>
@@ -56,8 +57,8 @@
                     <button id="%M">MD/MU</button>
                 </div>
                 <div class="calc__clear">
-                    <button id="CA">CA</button>
-                    <button id="C" class="btn--acc">C</button>
+                    <button id="CA" class="btn--acc">CA</button>
+                    <button id="C">C</button>
                     <button id=">">▻</button>
                 </div>
                 <div class="calc__memory">

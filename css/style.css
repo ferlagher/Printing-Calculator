@@ -10,6 +10,7 @@ ul {
 }
 
 [data-theme=drk] {
+  --clr-bkg: #292929;
   --clr-pri: #323232;
   --clr-sec: #404040;
   --clr-ter: #5A5D5F;
@@ -20,6 +21,7 @@ ul {
 }
 
 body {
+  --clr-bkg: #b6b6b6;
   --clr-pri: #D4D4D4;
   --clr-sec: #F2F2F3;
   --clr-ter: #A7B4BD;
@@ -65,63 +67,12 @@ button {
 }
 
 svg {
-  width: 100%;
-  height: auto;
-  stroke: var(--clr-txt);
-  fill: none;
-  stroke-width: 32;
-}
-svg .moon {
-  display: none;
-  stroke-dasharray: 106rem;
-  stroke-dashoffset: 106rem;
-  animation: moon 0.9s ease-in-out forwards;
-}
-svg .sun {
-  stroke-dasharray: 45rem;
-  stroke-dashoffset: 45rem;
-  animation: sun 0.9s ease-in-out forwards;
-}
-svg .beams {
-  stroke-dasharray: 4rem;
-  stroke-dashoffset: 4rem;
-  animation: beams 0.3s 0.7s ease-in forwards;
+  fill: var(--clr-txt);
 }
 
-[data-theme=drk] svg .moon {
-  display: block;
-}
-[data-theme=drk] svg .sun, [data-theme=drk] svg .beams {
-  display: none;
-}
-
-@keyframes moon {
-  0% {
-    stroke-dashoffset: 106rem;
-  }
-  100% {
-    stroke-dashoffset: 0;
-  }
-}
-@keyframes sun {
-  0% {
-    stroke-dashoffset: 45rem;
-  }
-  100% {
-    stroke-dashoffset: 0;
-  }
-}
-@keyframes beams {
-  0% {
-    stroke-dashoffset: 4rem;
-  }
-  100% {
-    stroke-dashoffset: 0;
-  }
-}
 button {
-  width: min((100vw - 48px) / 5, 76px);
-  height: min((100vw - 48px) / 5, 76px);
+  width: min((100vw - 48px) / 5, 75px);
+  height: min((100vw - 48px) / 5, 75px);
   background-color: var(--clr-sec);
   border: none;
   border-radius: 8px;
@@ -149,9 +100,8 @@ button:active {
 }
 
 .btn--md {
-  width: min((100vw - 48px) / 5 * 4 / 5, 60.8px);
-  height: min((100vw - 48px) / 5 * 4 / 5, 60.8px);
-  padding: 8px;
+  width: min((100vw - 48px) / 5 * 4 / 5, 50px);
+  height: min((100vw - 48px) / 5 * 4 / 5, 50px);
 }
 
 .calc__display {
@@ -171,13 +121,24 @@ button:active {
   opacity: 0.05;
 }
 
+body {
+  background-color: var(--clr-bkg);
+}
+
 main {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
 
+@media (min-width: 426px) {
+  main {
+    flex-direction: row;
+    align-items: center;
+  }
+}
 header {
   position: fixed;
   top: 0;
@@ -187,7 +148,7 @@ header {
 }
 
 .tape {
-  background-color: var(--clr-pri);
+  background-color: var(--clr-bkg);
   padding: 8px;
   text-align: end;
   overflow: scroll;
@@ -211,23 +172,43 @@ header {
 .calc {
   background-color: var(--clr-pri);
   background-image: url(../images/bkgd.svg);
-  background-blend-mode: normal;
+  max-width: 426px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 -6px 6px var(--clr-sdw);
+  box-shadow: 0 0 8px 4px var(--clr-sdw);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: height 2s ease-in-out;
 }
 .calc__resizer {
   width: 100%;
   text-align: center;
+  position: relative;
+}
+.calc__resizer label {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.calc__resizer input {
+  width: 0;
+  height: 0;
+}
+.calc__resizer svg {
+  transition: 0.3s 0.7s ease-in-out;
 }
 .calc__buttons {
+  max-height: 550px;
   overflow: hidden;
   padding: 8px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-areas: "margin margin margin items items" "tax tax sign percent percent" "clear clear clear memory memory" "numpad numpad numpad memory memory" "numpad numpad numpad operators operators";
   gap: 8px;
+  transition: height 1s ease-in-out;
 }
 .calc__margin {
   grid-area: margin;
@@ -291,4 +272,34 @@ header {
   flex-wrap: wrap-reverse;
   justify-content: space-between;
   gap: 8px;
+}
+
+.calc__buttons--hidden {
+  transition: height 1s ease-in-out;
+  max-height: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.calc__svg--rotate {
+  transition: 0.3s 0.7s ease-in-out;
+  transform: rotate(180deg);
+}
+
+@media (min-width: 426px) {
+  .calc {
+    margin: 2vw;
+  }
+  .calc__resizer {
+    display: none;
+  }
+}
+@keyframes hidden {
+  to {
+    height: 100%;
+  }
+  from {
+    height: 0%;
+    padding: 0%;
+  }
 }/*# sourceMappingURL=style.css.map */

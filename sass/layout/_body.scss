@@ -1,6 +1,18 @@
+body {
+    background-color: var(--clr-bkg);
+}
+
 main {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+@media (min-width: 426px) {
+    main {
+        flex-direction: row;
+        align-items: center;
+    }
 }
