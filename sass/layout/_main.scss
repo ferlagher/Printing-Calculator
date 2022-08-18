@@ -5,14 +5,14 @@ body {
 main {
     height: 100vh;
     display: flex;
-    flex-direction: column;
+    flex-flow: column;
     justify-content: flex-end;
     align-items: flex-end;
 }
 
-@media (min-width: 426px) {
+@media (min-width: 700px) {
     main {
-        flex-direction: row;
+        flex-flow: row wrap;
         align-items: center;
     }
 }

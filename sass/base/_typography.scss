@@ -21,11 +21,23 @@ button {
     @include font('tpe', 'rgl', 'md', var(--clr-txt));
 }
 
-aside {
+.offcanvas {
     @include font('btn', 'rgl', 'lg', var(--clr-txt));
     
     span{
     @include font('tpe', 'rgl', 'md', var(--clr-txt));
     opacity: 0.9;
-    }
+}
+}
+
+.modal {
+    @include font('btn', 'rgl', 'md', var(--clr-txt));
+}
+
+legend {
+    font-size: map-get($ft-sz, 'lg')
+}
+
+input {
+    @include font('tpe', 'rgl', 'md', var(--clr-txt));
 }

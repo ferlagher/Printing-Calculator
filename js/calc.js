@@ -167,7 +167,7 @@ const arithmetics = key => {
                 product = (factor * integerDigits) / 100
             }
             printProduct('=');
-            output.print(product, key);
+            output.total(product, key);
             output.display(toDecimal(product))
             total = sum.reduce((x, y) => x + y, 0);
         }

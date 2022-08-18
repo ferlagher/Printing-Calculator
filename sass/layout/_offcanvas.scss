@@ -1,7 +1,7 @@
 .offcanvas{
     position: fixed;
     height: 0;
-    z-index: 99;
+    z-index: 4;
     display: flex;
     flex-direction: row;
 
@@ -14,19 +14,23 @@
         height: 100%;
         width: 100%;
         transition: opacity 1s ease-in-out;
-        z-index: 50;
+        z-index: 3;
 
         &--hidden {
             opacity: 0;
             pointer-events: none;
+        }
+
+        &--modal {
+            z-index: 5;
         }
     }
 
     &__menu {
             background-color: var(--clr-pri);
             height: 100vh;
-            max-width: 320px;
-            border-radius: 10px;
+            max-width: 250px;
+            border-radius: 0 10px 10px 0;
             overflow: hidden;
             transition: max-width 1s ease-in-out;
             
@@ -50,10 +54,11 @@
     
     &__btn {
         margin: map-get($spc, 'sm');
-        z-index: 99;
     }
     
     &__svg {
+        width: 100%;
+        height: auto;
         transform: rotate(90deg);
         transition: transform 0.3s 0.7s ease-in-out;
         

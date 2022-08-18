@@ -1,10 +1,19 @@
 .tape {
     background-color: var(--clr-bkg);
+    min-width: 250px;
     width: 100%;
+    max-height: 100vh;
     padding: map-get($spc, 'sm');
     text-align: end;
     overflow: auto;
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    ul {
+        width: 240px;
+    }
 
     &__minus {
         color: var(--clr-sub);
@@ -21,5 +30,11 @@
 
     &__total {
         margin-bottom: 1em;
+    }
+}
+
+@media (min-width: 700px) {
+    .tape {
+        align-items: center;
     }
 }

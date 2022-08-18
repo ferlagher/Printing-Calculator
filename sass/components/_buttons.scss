@@ -7,14 +7,6 @@ button {
     box-shadow: 0 4px 4px var(--clr-sdw);
     transition: 0.1s ease-in-out;
 
-    &.btn--ter {
-        background-color: var(--clr-ter);
-    }
-    
-    &.btn--acc {
-        background-color: var(--clr-acc);
-    }
-    
     &:hover {
         filter: brightness(0.9);
     }
@@ -26,14 +18,32 @@ button {
     }
 }
 
-.btn--sm {
-    button {
+.btn {
+    &--text {
         font-size: map-get($ft-sz, 'sm');
-        height: map-get($siz, 'sm');
+        background-color: var(--clr-ter);
+        width: calc(50% - map-get($spc, 'sm') / 2);
+        height: auto;
+        padding: 1em;
     }
-}
+    
+    &--sm {
+        button {
+            font-size: map-get($ft-sz, 'sm');
+            height: map-get($siz, 'sm');
+        }
+    }
+    
+    &--md {
+        width: map-get($siz, 'md');
+        height: map-get($siz, 'md');
+    }
 
-.btn--md {
-    width: map-get($siz, 'md');
-    height: map-get($siz, 'md');
+    &--ter {
+        background-color: var(--clr-ter);
+    }
+    
+    &--acc {
+        background-color: var(--clr-acc);
+    }    
 }

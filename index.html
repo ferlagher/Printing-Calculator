@@ -13,20 +13,62 @@
     <title>Quasi0 Calculator</title>
 </head>
 
-<body data-theme="drk">
+<body data-theme="Dark">
     <div class="offcanvas__bkg offcanvas__bkg--hidden"></div>
     <aside class="offcanvas offcanvas--hidden">
         <ul class="offcanvas__menu offcanvas__menu--hidden">
-            <li id="theme">Theme<span>Dark</span></li>
-            <li id="tax">Tax Rate<span>22.00%</span></li>
-            <li id="clear">Clear tape</li>
-            <li id="share">Share tape</li>
-            <li id="manual">Manual</li>
+            <li id="menu__theme">Theme<span id="theme__span"></span></li>
+            <li id="menu__tax">Tax Rate<span id="tax__span"></span></li>
+            <li id="menu__clear">Clear tape</li>
+            <li id="menu__share">Share tape</li>
+            <li id="menu__manual">Manual</li>
         </ul>
         <button class="offcanvas__btn btn--md">
             <svg class="offcanvas__svg offcanvas__svg--rotate" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M14.83 16.42l9.17 9.17 9.17-9.17 2.83 2.83-12 12-12-12z"/></svg>
         </button>
     </aside>
+
+    <div id="modal__theme" class="modal">
+        <form id="theme" action="">
+            <legend>Theme</legend>
+            <label for="dark">
+                <input type="radio" name="theme" id="dark" value="Dark">
+                Dark
+            </label>
+            <label for="dark">
+                <input type="radio" name="theme" id="light" value="Light">
+                Ligth
+            </label>
+        </form>
+        <div class="modal__footer">
+            <button class="btn--text">Back</button>
+        </div>
+    </div>
+    <div id="modal__tax" class="modal">
+        <form id="tax" action="">
+            <label for="taxRate">Tax Rate
+                <input type="number" name="tax" id="taxRate" step="0.01" value="22">
+            </label>
+        </form>
+        <div class="modal__footer">
+            <button class="btn--text">Cancel</button>
+            <button class="btn--text btn--acc">Accept</button>
+        </div>
+    </div>
+    <div id="modal__clear" class="modal">
+        Clear all calculations?
+        <div class="modal__footer">
+            <button class="btn--text">Cancel</button>
+            <button class="btn--text btn--acc">Clear</button>
+        </div>
+    </div>
+    <div id="modal__soon" class="modal">
+        Comming soon
+        <div class="modal__footer">
+            <button class="btn--text">Back</button>
+        </div>
+    </div>
+
     <main>
         <div class="tape">
             <ul class="tape__list">
