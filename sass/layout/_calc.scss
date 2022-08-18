@@ -20,14 +20,18 @@
             position: absolute;
             top: 0;
             left: 0;
-            z-index: 99;
+            z-index: 2;
         }
         input {
             width: 0;
             height: 0;
         }
-        svg {
-            transition: transform 0.3s 0.7s ease-in-out;
+    }
+    &__svg {
+        transition: transform 0.3s 0.7s ease-in-out;
+
+        &--rotate {
+            transform: rotate(180deg);
         }
     }
 
@@ -47,6 +51,12 @@
             "#{nth($areas, 8)} #{nth($areas, 8)} #{nth($areas, 8)} #{nth($areas, 9)} #{nth($areas, 9)}";
         gap: map-get($spc, 'sm');
         transition: max-height 1s ease-in-out;
+
+        &--hidden {
+            max-height: 0px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+        }
     }
 
     @each $area in $areas {
@@ -59,18 +69,6 @@
             }
     }
 }
-
-.calc__buttons--hidden {
-    max-height: 0px;
-    padding-top: 0px;
-    padding-bottom: 0px;
-}
-
-.calc__svg--rotate {
-    transition: 0.3s 0.7s ease-in-out;
-    transform: rotate(180deg);
-}
-
 
 @media (min-width: 426px) {
     .calc {

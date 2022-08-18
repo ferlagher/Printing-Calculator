@@ -45,13 +45,6 @@ button {
   line-height: 0.5em;
 }
 
-.calc__resizer {
-  font-family: "Inter", sans-serif;
-  font-weight: 400;
-  font-size: 1.25rem;
-  color: var(--clr-txt);
-  line-height: 0.75em;
-}
 .calc__display {
   font-family: "DSEG7", monospace;
   font-weight: 700;
@@ -64,6 +57,20 @@ button {
   font-weight: 400;
   font-size: 1.25rem;
   color: var(--clr-txt);
+}
+
+aside {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: clamp(1.25rem, 8vw, 2rem);
+  color: var(--clr-txt);
+}
+aside span {
+  font-family: "Courier Prime", monospace;
+  font-weight: 400;
+  font-size: 1.25rem;
+  color: var(--clr-txt);
+  opacity: 0.9;
 }
 
 svg {
@@ -139,12 +146,60 @@ main {
     align-items: center;
   }
 }
-header {
+.offcanvas {
   position: fixed;
+  height: 0;
+  z-index: 99;
+  display: flex;
+  flex-direction: row;
+}
+.offcanvas__bkg {
+  background-color: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(2px);
+  position: absolute;
   top: 0;
   left: 0;
-  padding: 8px;
+  height: 100%;
+  width: 100%;
+  transition: opacity 1s ease-in-out;
+  z-index: 50;
+}
+.offcanvas__bkg--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.offcanvas__menu {
+  background-color: var(--clr-pri);
+  height: 100vh;
+  max-width: 320px;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: max-width 1s ease-in-out;
+}
+.offcanvas__menu li {
+  white-space: nowrap;
+  margin: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1em;
+}
+.offcanvas__menu li span {
+  text-align: end;
+}
+.offcanvas__menu--hidden {
+  max-width: 0;
+}
+.offcanvas__btn {
+  margin: 8px;
   z-index: 99;
+}
+.offcanvas__svg {
+  transform: rotate(90deg);
+  transition: transform 0.3s 0.7s ease-in-out;
+}
+.offcanvas__svg--rotate {
+  transform: rotate(-90deg);
 }
 
 .tape {
@@ -192,14 +247,17 @@ header {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 99;
+  z-index: 2;
 }
 .calc__resizer input {
   width: 0;
   height: 0;
 }
-.calc__resizer svg {
+.calc__svg {
   transition: transform 0.3s 0.7s ease-in-out;
+}
+.calc__svg--rotate {
+  transform: rotate(180deg);
 }
 .calc__buttons {
   max-height: 550px;
@@ -210,6 +268,11 @@ header {
   grid-template-areas: "margin margin margin items items" "tax tax sign percent percent" "clear clear clear memory memory" "numpad numpad numpad memory memory" "numpad numpad numpad operators operators";
   gap: 8px;
   transition: max-height 1s ease-in-out;
+}
+.calc__buttons--hidden {
+  max-height: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 .calc__margin {
   grid-area: margin;
@@ -273,17 +336,6 @@ header {
   flex-wrap: wrap-reverse;
   justify-content: space-between;
   gap: 8px;
-}
-
-.calc__buttons--hidden {
-  max-height: 0px;
-  padding-top: 0px;
-  padding-bottom: 0px;
-}
-
-.calc__svg--rotate {
-  transition: 0.3s 0.7s ease-in-out;
-  transform: rotate(180deg);
 }
 
 @media (min-width: 426px) {

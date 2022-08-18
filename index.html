@@ -14,11 +14,19 @@
 </head>
 
 <body data-theme="drk">
-    <header>
-        <button id="theme" class="btn--md">
-            <svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M14.83 16.42l9.17 9.17 9.17-9.17 2.83 2.83-12 12-12-12z"/></svg>
+    <div class="offcanvas__bkg offcanvas__bkg--hidden"></div>
+    <aside class="offcanvas offcanvas--hidden">
+        <ul class="offcanvas__menu offcanvas__menu--hidden">
+            <li id="theme">Theme<span>Dark</span></li>
+            <li id="tax">Tax Rate<span>22.00%</span></li>
+            <li id="clear">Clear tape</li>
+            <li id="share">Share tape</li>
+            <li id="manual">Manual</li>
+        </ul>
+        <button class="offcanvas__btn btn--md">
+            <svg class="offcanvas__svg offcanvas__svg--rotate" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M14.83 16.42l9.17 9.17 9.17-9.17 2.83 2.83-12 12-12-12z"/></svg>
         </button>
-    </header>
+    </aside>
     <main>
         <div class="tape">
             <ul class="tape__list">
@@ -93,6 +101,7 @@
         </div>
     </main>
     <script src="./js/theme.js"></script>
+    <script src="./js/offcanvass.js"></script>
     <script src="./js/moveCalc.js"></script>
     <script src="./js/calc.js"></script>
 </body>
