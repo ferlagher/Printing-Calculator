@@ -1,7 +1,14 @@
 const radio = document.querySelectorAll('[name="theme"]');
 const body = document.querySelector('body');
 const span = document.getElementById('theme__span')
-let theme = body.getAttribute('data-theme');
+let theme = localStorage.getItem('theme') ? localStorage.getItem('theme') : 'Dark';
+body.setAttribute('data-theme', theme);
+span.innerHTML = theme;
+radio.forEach(option => {
+    if (option.value === theme) {
+        option.checked = true;
+    }
+})
 
 radio.forEach(option => option.addEventListener('click', () => {
     if (option.checked) {
@@ -10,15 +17,3 @@ radio.forEach(option => option.addEventListener('click', () => {
         localStorage.setItem('theme', option.value);
     }
 }));
-
-const preference = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
-
-if (preference) {
-    body.setAttribute('data-theme', preference);
-    span.innerHTML = preference;
-    radio.forEach(option => {
-        if (option.value === preference) {
-            option.checked = true;
-        }
-    })
-}

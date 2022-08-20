@@ -11,6 +11,7 @@ const input = {
     items: document.querySelector('.calc__items').children,
     taxRate: document.querySelector('#taxRate'),
     taxBtn: document.querySelector('#taxBtn'),
+    clearBtn: document.querySelector('#clearBtn')
 };
 
 //Dealing with floats
@@ -37,7 +38,7 @@ const output = {
             li.classList.add('tape__minus');
         }
         li.innerHTML = toDecimal(int).toFixed(2) + ' ' + op.padEnd(2, ' ');
-        output.tape.appendChild(li);
+        this.tape.appendChild(li);
         li.scrollIntoView();
     },
     total: function (int, op) {
@@ -47,7 +48,7 @@ const output = {
             li.classList.add('tape__minus');
         }
         li.innerHTML = toDecimal(int).toFixed(2) + ' ' + op.padEnd(2, ' ');
-        output.tape.appendChild(li);
+        this.tape.appendChild(li);
         li.scrollIntoView();
 
     },
@@ -55,7 +56,7 @@ const output = {
         const li = document.createElement('li');
         li.classList.add('tape__clear');
         li.innerHTML = '····0····';
-        output.tape.appendChild(li);
+        this.tape.appendChild(li);
         li.scrollIntoView();
 
     },
@@ -63,17 +64,29 @@ const output = {
         const li = document.createElement('li');
         li.classList.add('tape__items');
         li.innerHTML = String(arr.length).padStart(3, '0').padEnd(16, '·');
-        output.tape.appendChild(li);
+        this.tape.appendChild(li);
         li.scrollIntoView();
     },
     separator: function() {
         const li = document.createElement('li');
         li.classList.add('tape__total')
         li.innerHTML = ''.padStart(19, '·');
-        output.tape.appendChild(li);
+        this.tape.appendChild(li);
         li.scrollIntoView();
     },
+    cleartape: function() {
+        while (this.tape.hasChildNodes()) {
+            this.tape.removeChild(this.tape.firstChild);
+        }
+    }
 };
+
+//Clear tape
+input.clearBtn.addEventListener('click', () => {
+    output.cleartape();
+    digits = '';
+    output.display('0');
+})
 
 //Memory
 let digits = '';
