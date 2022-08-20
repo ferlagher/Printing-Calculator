@@ -34,8 +34,8 @@ button {
     @include font('btn', 'rgl', 'md', var(--clr-txt));
 }
 
-legend {
-    font-size: map-get($ft-sz, 'lg')
+h1 {
+    @include font('btn', 'rgl', 'lg', var(--clr-txt));
 }
 
 input {

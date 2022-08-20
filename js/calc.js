@@ -9,6 +9,8 @@ const input = {
     tax: document.querySelector('.calc__tax').children,
     margin: document.querySelector('.calc__margin').children,
     items: document.querySelector('.calc__items').children,
+    taxRate: document.querySelector('#taxRate'),
+    taxBtn: document.querySelector('#taxBtn'),
 };
 
 //Dealing with floats
@@ -92,12 +94,24 @@ let isDividend = false;
 let percent = 0;
 let isPercent = false;
 
-let taxRate = 22;
-
 let cost = 0;
 let sell = 0;
 let margin = 0;
 let marginAmount = 0;
+
+//Tax rate
+let taxRate = localStorage.getItem('taxRate') ? localStorage.getItem('taxRate') : 22;
+input.taxRate.value = taxRate;
+document.querySelector('#tax__span').innerHTML = taxRate
+
+taxBtn.addEventListener('click', () => {
+    if (input.taxRate.value) {
+        taxRate = toDecimal(toInteger(input.taxRate.value));
+        localStorage.setItem('taxRate', taxRate);
+        input.taxRate.value = taxRate;
+        document.querySelector('#tax__span').innerHTML = taxRate
+    }
+})
 
 //Record number keys
 const numpad = key => {

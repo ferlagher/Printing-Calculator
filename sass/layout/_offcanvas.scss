@@ -13,12 +13,14 @@
         left: 0;
         height: 100%;
         width: 100%;
-        transition: opacity 1s ease-in-out;
         z-index: 3;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease-in-out;
 
-        &--hidden {
-            opacity: 0;
-            pointer-events: none;
+        &--show {
+            opacity: 1;
+            pointer-events: auto;
         }
 
         &--modal {
@@ -29,10 +31,10 @@
     &__menu {
             background-color: var(--clr-pri);
             height: 100vh;
-            max-width: 250px;
+            max-width: 0;
             border-radius: 0 10px 10px 0;
             overflow: hidden;
-            transition: max-width 1s ease-in-out;
+            transition: max-width 0.3s ease-in-out;
             
             li {
                 white-space: nowrap;
@@ -47,8 +49,8 @@
                 }
             }
             
-            &--hidden {
-                max-width: 0;
+            &--show {
+                max-width: 250px;
             }
         }
     
@@ -59,11 +61,11 @@
     &__svg {
         width: 100%;
         height: auto;
-        transform: rotate(90deg);
-        transition: transform 0.3s 0.7s ease-in-out;
+        transform: rotate(-90deg);
+        transition: transform 0.3s ease-in-out;
         
         &--rotate {
-            transform: rotate(-90deg);
+            transform: rotate(90deg);
         }
     }
 }

@@ -80,8 +80,11 @@ button {
   color: var(--clr-txt);
 }
 
-legend {
+h1 {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
   font-size: clamp(1.25rem, 8vw, 2rem);
+  color: var(--clr-txt);
 }
 
 input {
@@ -141,12 +144,19 @@ button:active {
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: var(--clr-pri);
-  min-width: 60%;
+  width: min(60%, 320px);
   border-radius: 8px;
   padding: 8px;
   z-index: 6;
   opacity: 0;
   pointer-events: none;
+  transition: opacity 0.2s ease-in-out;
+}
+.modal__body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 16px;
 }
 .modal__footer {
   margin-top: 8px;
@@ -157,11 +167,6 @@ button:active {
   opacity: 1;
   pointer-events: auto;
 }
-.modal form {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
 .modal label {
   display: flex;
   align-items: center;
@@ -169,6 +174,7 @@ button:active {
 }
 .modal input {
   background-color: transparent;
+  width: 100%;
   border: none;
   border-bottom: 2px solid var(--clr-sec);
 }
@@ -227,12 +233,14 @@ main {
   left: 0;
   height: 100%;
   width: 100%;
-  transition: opacity 1s ease-in-out;
   z-index: 3;
-}
-.offcanvas__bkg--hidden {
   opacity: 0;
   pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+}
+.offcanvas__bkg--show {
+  opacity: 1;
+  pointer-events: auto;
 }
 .offcanvas__bkg--modal {
   z-index: 5;
@@ -240,10 +248,10 @@ main {
 .offcanvas__menu {
   background-color: var(--clr-pri);
   height: 100vh;
-  max-width: 250px;
+  max-width: 0;
   border-radius: 0 10px 10px 0;
   overflow: hidden;
-  transition: max-width 1s ease-in-out;
+  transition: max-width 0.3s ease-in-out;
 }
 .offcanvas__menu li {
   white-space: nowrap;
@@ -256,8 +264,8 @@ main {
 .offcanvas__menu li span {
   text-align: end;
 }
-.offcanvas__menu--hidden {
-  max-width: 0;
+.offcanvas__menu--show {
+  max-width: 250px;
 }
 .offcanvas__btn {
   margin: 8px;
@@ -265,11 +273,11 @@ main {
 .offcanvas__svg {
   width: 100%;
   height: auto;
-  transform: rotate(90deg);
-  transition: transform 0.3s 0.7s ease-in-out;
+  transform: rotate(-90deg);
+  transition: transform 0.3s ease-in-out;
 }
 .offcanvas__svg--rotate {
-  transform: rotate(-90deg);
+  transform: rotate(90deg);
 }
 
 .tape {
