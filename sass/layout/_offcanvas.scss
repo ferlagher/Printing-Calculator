@@ -35,10 +35,13 @@
             border-radius: 0 10px 10px 0;
             overflow: hidden;
             transition: max-width 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
             
             li {
                 white-space: nowrap;
-                margin: 1em;
+                margin: 0.5em 1em;
                 display: flex;
                 justify-content: space-between;
                 align-items: baseline;
@@ -67,5 +70,15 @@
         &--rotate {
             transform: rotate(90deg);
         }
+    }
+}
+
+#menu__github {
+    margin-top: auto;
+
+    svg {
+        width: map-get($ft-sz, 'lg');
+        height: map-get($ft-sz, 'lg');
+        opacity: 0.75;
     }
 }

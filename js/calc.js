@@ -11,7 +11,7 @@ const input = {
     items: document.querySelector('.calc__items').children,
     taxRate: document.querySelector('#taxRate'),
     taxBtn: document.querySelector('#taxBtn'),
-    clearBtn: document.querySelector('#clearBtn')
+    clearBtn: document.querySelector('#clearBtn'),
 };
 
 //Dealing with floats
@@ -86,6 +86,10 @@ input.clearBtn.addEventListener('click', () => {
     output.cleartape();
     digits = '';
     output.display('0');
+
+    const modal = document.querySelector('#modal__clear');
+    modal.classList.remove('modal--show');
+    offBkg.classList.remove('offcanvas__bkg--modal');
 })
 
 //Memory
@@ -123,6 +127,10 @@ taxBtn.addEventListener('click', () => {
         localStorage.setItem('taxRate', taxRate);
         input.taxRate.value = taxRate;
         document.querySelector('#tax__span').innerHTML = taxRate
+
+        const modal = document.querySelector('#modal__tax');
+        modal.classList.remove('modal--show');
+        offBkg.classList.remove('offcanvas__bkg--modal');
     }
 })
 
@@ -593,7 +601,7 @@ for (let i = 0; i < input.items.length; i++) {
 };
 
 //event Listeners
-document.addEventListener('keydown', (e) => {
+const keyboard = e => {
     const numKeys = ['.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
     const opKeys = ['+', '-'];
     if (numKeys.includes(e.key)) {
@@ -623,7 +631,9 @@ document.addEventListener('keydown', (e) => {
     else if (e.key === 'Backspace') {
         clear('>')
     }
-});
+}
+
+document.addEventListener('keydown', keyboard);
 
 for (let i = 0; i < input.numpad.length; i++) {
     input.numpad[i].addEventListener('click', () => {

@@ -34,7 +34,7 @@ button {
     @include font('btn', 'rgl', 'md', var(--clr-txt));
 }
 
-h1 {
+h2 {
     @include font('btn', 'rgl', 'lg', var(--clr-txt));
 }
 

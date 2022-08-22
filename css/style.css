@@ -80,7 +80,7 @@ button {
   color: var(--clr-txt);
 }
 
-h1 {
+h2 {
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-size: clamp(1.25rem, 8vw, 2rem);
@@ -252,10 +252,13 @@ main {
   border-radius: 0 10px 10px 0;
   overflow: hidden;
   transition: max-width 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 .offcanvas__menu li {
   white-space: nowrap;
-  margin: 1em;
+  margin: 0.5em 1em;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -280,6 +283,15 @@ main {
   transform: rotate(90deg);
 }
 
+#menu__github {
+  margin-top: auto;
+}
+#menu__github svg {
+  width: clamp(1.25rem, 8vw, 2rem);
+  height: clamp(1.25rem, 8vw, 2rem);
+  opacity: 0.75;
+}
+
 .tape {
   background-color: var(--clr-bkg);
   min-width: 250px;
@@ -291,7 +303,7 @@ main {
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
 }
 .tape ul {
   width: 240px;
@@ -310,11 +322,6 @@ main {
   margin-bottom: 1em;
 }
 
-@media (min-width: 700px) {
-  .tape {
-    align-items: center;
-  }
-}
 .calc {
   background-color: var(--clr-pri);
   background-image: url(../images/bkgd.svg);
@@ -361,10 +368,12 @@ main {
   position: absolute;
   top: 0;
   right: 0;
+  text-shadow: 0 0 0.4em #00ECF8;
   margin: 0.5em 8px;
 }
 .calc__digit--off {
   opacity: 0.05;
+  text-shadow: none;
 }
 .calc__buttons {
   max-height: 550px;

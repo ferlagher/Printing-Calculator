@@ -47,9 +47,11 @@
         position: absolute;
         top: 0;
         right: 0;
+        text-shadow: 0 0 0.4em map-get($clr, 'dpy');
         margin: 0.5em map-get($spc, 'sm');
         &--off {
             opacity: 0.05;
+            text-shadow: none;
         }
     }
 

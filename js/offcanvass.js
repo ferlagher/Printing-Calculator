@@ -8,11 +8,13 @@ offBtn.addEventListener('click', () => {
         offMenu.classList.remove('offcanvas__menu--show');
         offSvg.classList.remove('offcanvas__svg--rotate');
         offBkg.classList.remove('offcanvas__bkg--show');
+        document.addEventListener('keydown', keyboard);
     }
     else {
         offMenu.classList.add('offcanvas__menu--show');
         offSvg.classList.add('offcanvas__svg--rotate');
         offBkg.classList.add('offcanvas__bkg--show');
+        document.removeEventListener('keydown', keyboard);
     }
 });
 
@@ -33,7 +35,7 @@ close.forEach(btn => {
     btn.addEventListener('click', () => {
         const modals = document.querySelectorAll('.modal')
 
-        modals.forEach(modal => modal.classList.remove('modal--show'))
+        modals.forEach(modal => modal.classList.remove('modal--show'));
         offBkg.classList.remove('offcanvas__bkg--modal');
     })
 })
