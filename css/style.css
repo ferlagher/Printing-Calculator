@@ -94,6 +94,13 @@ input {
   color: var(--clr-txt);
 }
 
+a {
+  color: var(--clr-sub);
+}
+a:visited {
+  color: var(--clr-sub);
+}
+
 svg {
   fill: var(--clr-txt);
 }
@@ -157,11 +164,17 @@ button:active {
   flex-direction: column;
   gap: 8px;
   margin: 16px;
+  height: 87%;
+  overflow-y: auto;
 }
 .modal__footer {
   margin-top: 8px;
   display: flex;
   justify-content: space-between;
+}
+.modal--full {
+  width: min(425px, 100%);
+  height: min(580px, 100%);
 }
 .modal--show {
   opacity: 1;

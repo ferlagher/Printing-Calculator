@@ -71,8 +71,78 @@
             <button id="clearBtn" class="btn--text btn--acc">Clear</button>
         </div>
     </div>
-    <div id="modal__manual" class="modal">
-        Comming soon
+    <div id="modal__manual" class="modal modal--full">
+        <div class="modal__body">
+            <h1 id="quasi0-manual">Quasi0 Manual</h1>
+
+            <h2 id="table-of-contents">Table of contents</h2>
+            <ul>
+                <li><a href="#basic-calculations">Basic calculations</a></li>
+                <li><a href="#memory">Memory</a></li>
+                <li><a href="#percentage">Percentage</a></li>
+                <li><a href="#tax-calculations">Tax calculations</a></li>
+                <li><a href="#mark-up">Mark up</a></li>
+                <li><a href="#cost-sell-and-margin">Cost, sell and margin</a></li>
+                <li><a href="#average">Average</a></li>
+            </ul>
+
+            <h2 id="basic-calculations">Basic calculations</h2>
+            <p>Before starting any calculation, press [CA] to make sure memory is reset.</p>
+            <p><strong>Important:</strong> This calculator operates like and adding machine. This means that some operations like addition and subtraction works different than a regular calculator.</p>
+            <h3 id="addition-and-subtraction">Addition and subtraction</h3>
+            <p>Digit the number followed by its sign [⩲] [-] to add it to the memory.
+            Then press the total key [*] to print the result and add it to the grand total memory.<br>You can print the grand total using the key [G*].<br>To print the actual subtotal during a sum, use [♢/#].</p>
+            <p>Ex.:<br>[2][0][⩲] =&gt; 20.00 +<br>[5][.][5][-] =&gt; 5.50 -<br>[♢/#] =&gt; 14.50 ♢<br>[1][0][⩲] =&gt; 10.00 +<br>[*] =&gt; 24.50 *  </p>
+            <p>[6][5][.][5][-] =&gt; 65.5 -<br>[1][5][⩲] =&gt; 15.00 +<br>[*] =&gt; -50.50 *  </p>
+            <p>[G*] =&gt; -26.00 *  </p>
+            <h3 id="multiplication-and-division">Multiplication and division</h3>
+            <p>Digit the number followed by the multiplication [×] or division [÷] key, then digit the next number and press [⩲] to add it or [-] to subtract it to the total.<br>You can also multiply or divide the previous total.  </p>
+            <p>Ex.:<br>[9][×] =&gt; 9.00 ×<br>[2][⩲] =&gt; 2.00 = 18.00 +  </p>
+            <p>[9][×] =&gt; 9.00 ×<br>[2][-] =&gt; 2.00 = 18.00 -  </p>
+            <p>[*] =&gt; 0.00 *  </p>
+            <p>Ex.:<br>[1][00][⩲] =&gt; 100.00 +<br>[2][00][⩲] =&gt; 200.00 +<br>[÷] =&gt; 300.00 ÷<br>[3][⩲] =&gt; 3.00 = 100.00 +  </p>
+
+            <h2 id="memory">Memory</h2>
+            <p>To use the independent memory, press [M+] or [M-] instead of [⩲] or [-] after a multiplication or division to add the result to the memory.
+            Use [M♢] to print the current subtotal and [M*] to print the total and clear the memory.</p>
+            <p>Ex.:<br>[2][×] =&gt; 2.00 ×<br>[3][M+] =&gt; 3.00 = 6.00 M+  </p>
+            <p>[1][0][÷] =&gt; 10.00 ÷<br>[2][M-] =&gt; 2.00 = 5.00 M-  </p>
+            <p>[M*] =&gt; 1.00 M*  </p>
+
+            <h2 id="percentage">Percentage</h2>
+            <p>To find the percentage of a number, digit that number followed by the multiplication key [×], then digit the percentage value and press the percent key [%].
+            You can then add or subtract the result to the inital number pressing [⩲] or [-].</p>
+            <p>Ex.:<br>[5][00][×] =&gt; 500.00 ×<br>[2][0][%] =&gt; 20.00 % = 100.00 ·<br>[⩲] =&gt; 600 +%  </p>
+            <p>Ex.:<br>[5][00][×] =&gt; 500.00 ×<br>[2][0][%] =&gt; 20.00 % = 100.00 ·<br>[-] =&gt; 400 -%  </p>
+            <p>To find what percent of a number is another number, use the division key [÷] instead.</p>
+            <p>Ex.:<br>[1][2][÷] =&gt; 12.00 ÷<br>[6][0][%] =&gt; 60.00 % = 20.00 ·  </p>
+
+            <h2 id="mark-up">Mark up</h2>
+            <p>To mark up a price, digit the price followed by the multiplication key [×], then digit the profit percentage and press [MD/MU].</p>
+            <p>Ex.:<br>[1][00][×] =&gt; 100.00 ×<br>[2][0][MD/MU] =&gt; 20.00 %M 25.00 · 125.00 ·  </p>
+
+            <h2 id="tax-calculations">Tax calculations</h2>
+            <p>To add or subtract taxes to a price, digit the price followed by [TAX+] or [TAX-] respectively.</p>
+            <p>Ex.:<br>[5][0][TAX+] =&gt; 50.00 -T 22.00 %T 11.00 T 61.00 +T  </p>
+            <p>Ex.:<br>[6][1][TAX-] =&gt; 61.00 +T 22.00 %T 11.00 T 50.00 -T  </p>
+
+            <h2 id="cost-sell-and-margin">Cost, sell and margin</h2>
+            <h3 id="calulating-the-cost">Calulating the cost</h3>
+            <p>Digit the sell price followed by the sell key [SELL], then digit the margin rate followed by the margin key [MAR].
+            Press [MAR] again to print the margin amount or [COST] to print the cost.</p>
+            <p>Ex.:<br>[2][00][SELL] =&gt; 200.00 **<br>[2][0][MAR] =&gt; 20.00 %M 160 ♢♢<br>[MAR] =&gt; 20.00 %M 40.00 MT<br>[COST] =&gt; 160.00 ♢♢  </p>
+            <h3 id="calulating-the-sell-price">Calulating the sell price</h3>
+            <p>Digit the cost followed by the cost key [COST], then digit the margin rate followed by the margin key [MAR].
+            Press [MAR] again to print the margin amount or [SELL] to print the sell price.</p>
+            <p>Ex.:<br>[1][6][0][COST] =&gt; 160 ♢♢<br>[2][0][MAR] =&gt; 20.00 %M 200.00 **<br>[MAR] =&gt; 20.00 %M 40.00 MT<br>[SELL] =&gt; 200.00 **  </p>
+            <h3 id="calulating-the-margin-rate-and-amount">Calulating the margin rate and amount</h3>
+            <p>Digit the cost followed by the cost key [COST], then digit the sell price followed by the sell key [SELL] (order doesn&#39;t matter). Press [MAR] to print the margin amount.</p>
+            <p>Ex.:<br>[1][6][0][COST] =&gt; 160.00 ♢♢<br>[2][00][SELL] =&gt; 200.00 ** 20.00 %M<br>[MAR] =&gt; 40.00 MT  </p>
+
+            <h2 id="average">Average</h2>
+            <p>After an addition/subtraction, press the item key [IT] to pritn the average off all items in the sum.</p>
+            <p>Ex.:<br>[1][5][0][⩲] =&gt; 150.00 +<br>[2][2][0][⩲] =&gt; 220.00 +<br>[1][00][-] =&gt; 100.00 -<br>[IT] =&gt; 90.00 #  </p>
+        </div>
         <div class="modal__footer">
             <button class="btn--close btn--text">Back</button>
         </div>

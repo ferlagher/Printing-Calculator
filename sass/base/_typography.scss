@@ -41,3 +41,11 @@ h2 {
 input {
     @include font('tpe', 'rgl', 'md', var(--clr-txt));
 }
+
+a {
+    color: var(--clr-sub);
+
+    &:visited {
+    color: var(--clr-sub);
+    }
+}

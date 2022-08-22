@@ -17,12 +17,19 @@
         flex-direction: column;
         gap: map-get($spc, 'sm');
         margin: map-get($spc, 'sm') * 2;
+        height: 87%;
+        overflow-y: auto;
     }
 
     &__footer {
         margin-top: map-get($spc, 'sm');
         display: flex;
         justify-content: space-between;
+    }
+
+    &--full {
+        width: min(425px, 100%);
+        height: min(580px, 100%);
     }
 
     &--show {
