@@ -223,10 +223,6 @@ const arithmetics = key => {
         else if (isPercent) {
             if (typeof(factor) != 'number') {factor = factor[0]};
             digits = toDecimal(factor + parseInt(key + 1) * percent);
-            console.log("🚀 ~ file: calc.js ~ line 225 ~ arithmetics ~ factor", factor, typeof(factor))
-            console.log("🚀 ~ file: calc.js ~ line 225 ~ arithmetics ~ percent", percent)
-            console.log("🚀 ~ file: calc.js ~ line 225 ~ arithmetics ~ key", key)
-            console.log("🚀 ~ file: calc.js ~ line 225 ~ arithmetics ~ digits", digits)
             output.total(toInteger(digits), key + '%');
             output.display(digits);
             percent = 0;
