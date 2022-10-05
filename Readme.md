@@ -1,4 +1,4 @@
-# Quasi0 Manual
+# Quasio Manual
 ## Table of contents
 
 - [Basic calculations](#basic-calculations)
